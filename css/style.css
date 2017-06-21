@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+.navbar-material .nav-wrapper .brand-logo img {
+  height: 64px;
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
