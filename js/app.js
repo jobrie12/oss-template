@@ -64,7 +64,9 @@ app.controller('AboutCtrl', [
 app.controller('ContactCtrl', [
     '$scope',
     '$state',
-    function($scope, $state){
+    '$window',
+    '$http',
+    function($scope, $state, $window, $http){
         $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
         $scope.serviceOptions = [
             {name:'New Website', value:false},
@@ -80,20 +82,47 @@ app.controller('ContactCtrl', [
         $scope.website = "";
         $scope.business = "";
         $scope.followUp = "";
-        $scope.services = [];
         $scope.other = "";
+        $scope.services = "";
 
         function init(){
             $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
             $('select').material_select();
-
-            console.log($scope.serviceOptions);
         }
 
         init();
 
-        $scope.openEmail = function(){
+        $scope.generateEmail = function(){
+            console.log("We have Submitted");
 
+            $scope.serviceOptions.forEach(function(n){
+               if(n.value){
+                   $scope.services += n.name + " | "
+               }
+            });
+
+            $http({
+                method: "POST",
+                url: "server/mail_handler.php",
+                data: {
+                    name: $scope.name,
+                    phone: $scope.phone,
+                    email: $scope.email,
+                    website: $scope.website,
+                    business: $scope.business,
+                    followUp: $scope.followUp,
+                    services: $scope.services,
+                    other: $scope.other
+                }
+            }).then(function successCallback(response) {
+                console.log(response);
+            }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                console.log(response);
+                }
+
+            );
         }
     }]);
 

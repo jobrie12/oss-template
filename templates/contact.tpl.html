@@ -3,7 +3,7 @@
         <h1>Contact Us</h1>
     </div>
     <div class="row">
-        <form class="col s12">
+        <form class="col s12" data-ng-submit="generateEmail()">
             <div class="row">
                 <div class="input-field col s6">
                     <input id="name" type="text" data-ng-model="name" class="validate">
@@ -42,6 +42,21 @@
                     <label for="{{service.name}}">{{service.name}}</label>
                 </div>
             </div>
+            <div class="row" data-ng-show="serviceOptions[1].value">
+                <div class="input-field col s12">
+                    <input id="website" type="text" data-ng-model="website" class="validate">
+                    <label for="website">Current Website</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea" data-ng-model="additional"></textarea>
+                    <label for="textarea1">Additional Information (Optional)</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
         </form>
     </div>
 </div>
