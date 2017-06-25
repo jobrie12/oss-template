@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Contact Us</h1>
+    </div>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="name" type="text" data-ng-model="name" class="validate">
+                    <label for="name">Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="business" type="text" data-ng-model="business" class="validate">
+                    <label for="business">Business</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" type="text" data-ng-model="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <select data-ng-model="followUp" material-select watch>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="E-Mail">E-Mail</option>
+                        <option value="Call">Call</option>
+                        <option value="Text">Text</option>
+                    </select>
+                    <label>How Should We Follow Up?</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <input id="phone" type="text" data-ng-model="phone" class="validate">
+                    <label for="phone">Phone (Optional if you chose Email)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3" data-ng-repeat="service in serviceOptions">
+                    <input type="checkbox" id="{{service.name}}" data-ng-model="service.value" />
+                    <label for="{{service.name}}">{{service.name}}</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

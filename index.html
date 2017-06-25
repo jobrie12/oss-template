@@ -9,150 +9,80 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="icons/Icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/Icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="icons/Icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/Icon.png">
+  <link rel="manifest" href="icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
-<body>
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" id="logo" height="20%" width="20%" src="oneiros.png"/></a>
+<body ng-app="oneiros">
+  <nav ng-controller="NavCtrl" class="white" role="navigation">
+    <div class="nav-wrapper" style="padding-right:20px;">
+      <a style="padding-left: 20px;" id="logo-container" href="#/home" class="brand-logo"><img class="responsive-img" id="logo" height="20%" width="20%" src="oneiros.png"/></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <li class="{{isActive('home')}}"><a href="#/home">Home</a></li>
+        <li class="{{isActive('about')}}"><a href="#/about">About</a></li>
+        <li class="{{isActive('services')}}"><a href="#/services">Services</a></li>
+        <li class="{{isActive('samples')}}"><a href="#/samples">Samples</a></li>
+        <li class="{{isActive('contact')}}"><a href="#/contact">Contact</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
+        <li ><a href="#/home">Home</a></li>
+        <li ><a href="#/about">About</a></li>
+        <li><a href="#/services">Services</a></li>
+        <li ><a href="#/samples">Samples</a></li>
+        <li ><a href="#/contact">Contact</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
 
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center white-text">Oneiros</h1>
-        <div class="row center">
-          <h5 class="header col s12 light cyan-text text-accent-2">Dreamlike Web and Mobile Design</h5>
-        </div>
-        <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-        </div>
-        <br><br>
+  <ui-view></ui-view>
 
-      </div>
-    </div>
-    <div class="parallax"><img src="space-background.jpeg" alt="Beautiful Space"></div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">update</i></h2>
-            <h5 class="center">Quick Development</h5>
-
-            <p class="center light">After designing tens of websites and applications from over 4 years of web development, we
-              know how to complete projects promptly. Whether taking your business to the web,
-              optimizing your site for mobile devices, or just revamping your brand to draw in new customers, we guarantee
-              you'll be impressed by the efficiency of our work!
-            </p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">Personalized Design</h5>
-
-            <p class="light center">Your business, your design! We work to make sure you are happy with the look and feel of your site.
-            Care to run a promotion on Groupon, or accept online orders from Eat24? We will help set those up too!
-              If you don't have too much input, we always have plenty of ideas for a dynamic and polished website.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">local_atm</i></h2>
-            <h5 class="center">Affordable</h5>
-
-            <p class="light center">We are a lean team with competitive pricing! We would love to consult with your business and discuss
-              visions, while even building
-              customized demos before you buy our services so you can see the improvements we want to make for you. Our quotes are
-              project based, so there's no stalling on our end to get your work done, and you'll know exactly the cost!
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light cyan-text text-accent-2">A personification of dreams</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="cloud-background.jpeg" alt="Unsplashed background img 2"></div>
-  </div>
-
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
-  </div>
+  
 
   <footer class="page-footer teal">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <h5 class="white-text">Oneiros | o·nei·ros | /ōˈnīrōs/</h5>
+          <p class="grey-text text-lighten-4">
+            In Greek mythology, the Oneiroi or Oneiri (Ὄνειροι, "Dreams") are various gods and
+            demigods that rule over dreams. Born from Night (Nyx) and Darkness (Erebus), these winged personifications
+            of dreams emerge from their cavern each night to deliver either prophetic or whimsical dreams.
 
+            <br>
+            We hope our dreamlike solutions will suit you.
+          </p>
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Site Map</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="#/home">Home</a></li>
+            <li><a class="white-text" href="#/about">About</a></li>
+            <li><a class="white-text" href="#/services">Services</a></li>
+            <li><a class="white-text" href="#/contact">Contact</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="http://fb.me/oneirossolutions">Facebook</a></li>
+            <li><a class="white-text" href="mailto:jamesbryantobrien@gmail.com">E-mail</a></li>
           </ul>
         </div>
       </div>
@@ -167,8 +97,11 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
   <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+  <script src="js/app.js"></script>
 
   </body>
 </html>
