@@ -14,7 +14,7 @@
     $to='jamesbryantobrien@gmail.com'; // Receiver Email ID, Replace with your email ID
     $subject='Oneiros Inquiry | '.$business;
     $message="Name :".$name."\n"."Phone :".$phone."\n"."Email :".$email."\n"."Website :".$website."\n"."Follow Up :".$followUp."\n"."Services :".$services."\n"."Wrote the following :"."\n\n".$other;
-    $headers="From: ".$email;
+    $headers="From: contact@oneirossolutions.com";
 
     mail($to, $subject, $message, $headers);
 ?>

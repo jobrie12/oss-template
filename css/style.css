@@ -6,8 +6,8 @@
  * Made By MaterializeCSS.com
  */
 
-.navbar-material .nav-wrapper .brand-logo img {
-  height: 64px;
+body {
+  background-color: #e0f2f1;
 }
 
 nav ul a,

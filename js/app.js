@@ -3,6 +3,10 @@
  */
 var app = angular.module('oneiros', ['ui.router']);
 
+app.config(['$locationProvider', function($locationProvider) {
+    $locationProvider.hashPrefix('');
+}]);
+
 app.config([
     '$stateProvider',
     '$urlRouterProvider',
@@ -59,6 +63,72 @@ app.controller('AboutCtrl', [
     '$scope',
     '$state',
     function($scope, $state){
+
+        $scope.Date = Date;
+
+        function createSetup(units, scale){
+
+            return {
+                color: '#ff0000',
+                // This has to be the same size as the maximum width to
+                // prevent clipping
+                strokeWidth: 2,
+                trailWidth: 1,
+                easing: 'easeInOut',
+                duration: 3400,
+                svgStyle: {width: '100%', height: '100%'},
+                text: {
+                    style: {
+                        // Text color.
+                        // Default: same as stroke color (options.color)
+                        position: 'absolute',
+                        right: '40px',
+                        padding: 0,
+                        margin: 0,
+                        transform: null
+                    },
+                    class:'right',
+                    autoStyleContainer: false
+                },
+                from: { color: '#ff0000', width: 2 },
+                to: { color: '#00ff00', width: 2 },
+                // Set default step function for all animate calls
+                step: function(state, circle) {
+                    circle.path.setAttribute('stroke', state.color);
+                    circle.path.setAttribute('stroke-width', state.width);
+
+                    var value = Math.round(circle.value() * scale * 10) / 10.0;
+                    if (value === 0) {
+                        circle.setText('');
+                    } else {
+                        circle.setText(value + ' ' + units);
+                    }
+
+                    circle.text.style.color = state.color;
+                }
+            }
+
+        }
+
+        function init(){
+
+            var setup = createSetup('years', 12);
+            var setup2 = createSetup('gallons', 300);
+            var setup3 = createSetup('chickens', 15);
+            var setup4 = createSetup('/365', 365);
+            var bar = new ProgressBar.Line('#container', setup);
+            var bar2 = new ProgressBar.Line('#container2', setup2);
+            var bar3 = new ProgressBar.Line('#container3', setup3);
+            var bar4 = new ProgressBar.Line('#container4', setup4);
+            bar.animate(.75);  // Number from 0.0 to 1.0
+            bar2.animate(105/300.0);  // Number from 0.0 to 1.0
+            bar3.animate(13/15.0);  // Number from 0.0 to 1.0
+            var dayAgo = (new Sugar.Date.create('October 6, 2016')).daysAgo();
+
+            console.log(dayAgo);
+        }
+
+        init();
     }]);
 
 app.controller('ContactCtrl', [
@@ -73,6 +143,8 @@ app.controller('ContactCtrl', [
             {name:'Website Redesign', value:false},
             {name:'Logo/Graphic Design', value:false},
             {name:'Eat24 Online Order Integration', value:false},
+            {name:'E-Commerce', value:false},
+            {name:'E-Mail Outreach', value:false},
             {name:'Web Training', value:false},
             {name:'Other', value:false}
             ];
@@ -86,14 +158,35 @@ app.controller('ContactCtrl', [
         $scope.services = "";
 
         function init(){
-            $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
-            $('select').material_select();
+            $(document).ready(function() {
+                $('select').material_select();
+            });
         }
 
         init();
 
+        function clearForm() {
+            $scope.serviceOptions = [
+                {name:'New Website', value:false},
+                {name:'Website Redesign', value:false},
+                {name:'Logo/Graphic Design', value:false},
+                {name:'Eat24 Online Order Integration', value:false},
+                {name:'E-Commerce', value:false},
+                {name:'E-Mail Outreach', value:false},
+                {name:'Web Training', value:false},
+                {name:'Other', value:false}
+            ];
+            $scope.name = "";
+            $scope.phone = "";
+            $scope.email = "";
+            $scope.website = "";
+            $scope.business = "";
+            $scope.followUp = "";
+            $scope.other = "";
+            $scope.services = "";
+        }
+
         $scope.generateEmail = function(){
-            console.log("We have Submitted");
 
             $scope.serviceOptions.forEach(function(n){
                if(n.value){
@@ -101,28 +194,61 @@ app.controller('ContactCtrl', [
                }
             });
 
-            $http({
-                method: "POST",
-                url: "server/mail_handler.php",
-                data: {
-                    name: $scope.name,
-                    phone: $scope.phone,
-                    email: $scope.email,
-                    website: $scope.website,
-                    business: $scope.business,
-                    followUp: $scope.followUp,
-                    services: $scope.services,
-                    other: $scope.other
-                }
-            }).then(function successCallback(response) {
-                console.log(response);
-            }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                console.log(response);
-                }
+            var toast = "";
 
-            );
+            if ($scope.name.length < 1){
+                toast += " name,"
+            }
+            if ($scope.business.length < 1) {
+                toast += " business,"
+            }
+            if ($scope.email.length < 1) {
+                toast += " email,"
+            }
+            if (!$scope.followUp) {
+                toast += " follow up,"
+            }
+            if ($scope.services.length < 1) {
+                toast += " services,"
+            }
+
+            if (toast.length > 0){
+                toast = toast.slice(0, -1);
+                Materialize.toast("Please fill out the " + toast + " fields before submitting.", 5000, 'rounded red')
+            }else if ($scope.followUp != "E-mail" && $scope.phone.length < 1){
+                Materialize.toast("If you want us to follow up by phone, we will need a phone #", 5000, 'rounded red')
+            }
+            else {
+                $scope.services = $scope.services.slice(0, -2);
+                $http({
+                    method: "POST",
+                    url: "server/mail_handler.php",
+                    data: {
+                        name: $scope.name,
+                        phone: $scope.phone,
+                        email: $scope.email,
+                        website: $scope.website,
+                        business: $scope.business,
+                        followUp: $scope.followUp,
+                        services: $scope.services,
+                        other: $scope.other
+                    }
+                }).then(function successCallback(response) {
+                        if (response.data.indexOf('Failed') != -1){
+                            Materialize.toast("ERROR: " + response.data, 5000, 'rounded red');
+                            clearForm();
+                        } else {
+                            Materialize.toast("Thanks for the email, we'll get back to you shortly!", 5000, 'rounded green')
+                            clearForm();
+                        }
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        Materialize.toast("ERROR: " + response.data, 5000, 'rounded red')
+                    }
+
+                );
+            }
         }
     }]);
 
@@ -130,8 +256,42 @@ app.controller('HomeCtrl', [
     '$scope',
     '$state',
     function($scope, $state){
+
+        $scope.quote = [
+            {
+                name:"New Website Domain and Hosting (3 years)",
+                rate:150.00,
+                quantity:1
+            },
+            {
+                name:"Website Backend & Styling",
+                rate:100.00,
+                quantity:1
+            },
+            {
+                name:"Web Content (Pages)**",
+                rate:30.00,
+                quantity:5
+            },
+            {
+                name:"E-Mail Form",
+                rate:25.00,
+                quantity:1
+            },
+            {
+                name:"1 Year Support, Updates, and Training",
+                rate:0.00,
+                quantity:1
+            }
+        ];
+
+        $scope.total = 0.00;
         function init() {
             $('.parallax').parallax();
+
+            $scope.quote.forEach(function(item){
+                $scope.total += (item.rate * item.quantity);
+            });
         }
 
         init();

@@ -1,62 +1,69 @@
 <div class="container">
     <div class="page-header">
-        <h1>Contact Us</h1>
+        <h3 class="teal-text darken-4">Contact Us</h3>
     </div>
     <div class="row">
         <form class="col s12" data-ng-submit="generateEmail()">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="name" type="text" data-ng-model="name" class="validate">
-                    <label for="name">Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="business" type="text" data-ng-model="business" class="validate">
-                    <label for="business">Business</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="text" data-ng-model="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <select data-ng-model="followUp" material-select watch>
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="E-Mail">E-Mail</option>
-                        <option value="Call">Call</option>
-                        <option value="Text">Text</option>
-                    </select>
-                    <label>How Should We Follow Up?</label>
-                </div>
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <span class="card-title">Submit Form to Send E-mail</span>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="name" type="text" data-ng-model="name" class="validate">
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="business" type="text" data-ng-model="business" class="validate">
+                            <label for="business">Business</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="text" data-ng-model="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select data-ng-model="followUp" material-select watch>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="E-Mail">E-Mail</option>
+                                <option value="Call">Call</option>
+                                <option value="Text">Text</option>
+                            </select>
+                            <label>How Should We Follow Up?</label>
+                        </div>
 
-                <div class="input-field col s6">
-                    <input id="phone" type="text" data-ng-model="phone" class="validate">
-                    <label for="phone">Phone (Optional if you chose Email)</label>
+                        <div class="input-field col s6">
+                            <input id="phone" type="text" data-ng-model="phone" class="validate">
+                            <label for="phone">Phone (Optional)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 m3" data-ng-repeat="service in serviceOptions">
+                            <input type="checkbox" id="{{service.name}}" data-ng-model="service.value" />
+                            <label for="{{service.name}}">{{service.name}}</label>
+                        </div>
+                    </div>
+                    <div class="row" data-ng-show="serviceOptions[1].value">
+                        <div class="input-field col s12">
+                            <input id="website" type="text" data-ng-model="website" class="validate">
+                            <label for="website">Current Website</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea" data-ng-model="other"></textarea>
+                            <label for="textarea1">Additional Information (Optional)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s3" data-ng-repeat="service in serviceOptions">
-                    <input type="checkbox" id="{{service.name}}" data-ng-model="service.value" />
-                    <label for="{{service.name}}">{{service.name}}</label>
-                </div>
-            </div>
-            <div class="row" data-ng-show="serviceOptions[1].value">
-                <div class="input-field col s12">
-                    <input id="website" type="text" data-ng-model="website" class="validate">
-                    <label for="website">Current Website</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" data-ng-model="additional"></textarea>
-                    <label for="textarea1">Additional Information (Optional)</label>
-                </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-            </button>
         </form>
     </div>
 </div>

@@ -2,7 +2,7 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <h1 class="header center white-text">Oneiros</h1>
+            <h1 class="header center white-text condensed light">Oneiros</h1>
             <div class="row center">
                 <h5 class="header col s12 light cyan-text text-accent-2">Dreamlike Web and Mobile Design</h5>
             </div>
@@ -13,7 +13,7 @@
 
         </div>
     </div>
-    <div class="parallax"><img src="images/space-background.jpeg" alt="Beautiful Space"></div>
+    <div class="parallax"><img src="images/space-background-min.jpeg" alt="Beautiful Space"></div>
 </div>
 
 
@@ -22,9 +22,9 @@
 
         <!--   Icon Section   -->
         <div class="row">
-            <div class="col s12 m3">
+            <div class="col s12 m6 l3">
                 <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">update</i></h2>
+                    <h2 class="center  teal-text darken-4"><i class="material-icons">update</i></h2>
                     <h5 class="center">Quick Development</h5>
 
                     <p class="center light">With over four years of web and application development for NASA, we know how to complete projects promptly.
@@ -34,9 +34,9 @@
                 </div>
             </div>
 
-            <div class="col s12 m3">
+            <div class="col s12 m6 l3">
                 <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+                    <h2 class="center teal-text darken-4"><i class="material-icons">group</i></h2>
                     <h5 class="center">Personalized Design</h5>
 
                     <p class="light center">Your business, your design! We work to make sure you are happy with the look and feel of your site.
@@ -45,9 +45,9 @@
                 </div>
             </div>
 
-            <div class="col s12 m3">
+            <div class="col s12 m6 l3">
                 <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">local_atm</i></h2>
+                    <h2 class="center teal-text darken-4"><i class="material-icons">local_atm</i></h2>
                     <h5 class="center">Affordable</h5>
 
                     <p class="light center">We are a lean team with competitive pricing! We would love to consult with your business and discuss
@@ -58,9 +58,9 @@
                 </div>
             </div>
 
-            <div class="col s12 m3">
+            <div class="col s12 m6 l3">
                 <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">phonelink</i></h2>
+                    <h2 class="center teal-text darken-4"><i class="material-icons">phonelink</i></h2>
                     <h5 class="center">Compatible with Every Device</h5>
                     <p class="light center">
                         Try shrinking or expanding your browser and watch the content adapt! If your site frustrates smartphone users,
@@ -79,21 +79,56 @@
     <div class="section no-pad-bot">
         <div class="container">
             <div class="row center">
-                <h5 class="header col s12 light cyan-text text-accent-2">A personification of dreams</h5>
+                <h5 class="header col s12 light black-text text-accent-2">Clean and responsive.</h5>
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="images/cloud-background.jpeg" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="images/cloud-background.jpeg" alt="Clean Clouds"></div>
 </div>
 
 <div class="container">
-    <div class="section">
-
+    <div class="section" id="pricing">
         <div class="row">
             <div class="col s12 center">
-                <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Contact Us</h4>
-                <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+                <h4>Sample Pricing and Comparison</h4>
+                <p class="left-align light">
+                    Every client's needs are unique and so we can't give specific pricing, but we also understand the need
+                    for ballpark estimates sometimes. For this website, the quote would look like:
+                </p>
+                <table class="highlight responsive-table">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr data-ng-repeat="item in quote">
+                        <td>{{item.name}}</td>
+                        <td>{{item.rate | currency}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{(item.rate* item.quantity) | currency}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td style="font-weight:bold">Total</td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-weight:bold">{{total | currency}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="condensed light">** Pages aren't always an accurate metric, if your pages are simple it's cheaper,
+                    if they are rich with content, it may cost slightly more.</p>
+                <p>This is comparable to <a target="_blank" href="http://www.wix.com/upgrade/premium-plans">Wix's Unlimited Plan at $14/mo</a>
+                    which equates to $504 over 3 years, or <a target="_blank" href="https://www.squarespace.com/pricing#websites"> Squarespace's $12/mo Personal Plan</a>
+                    for $432 over 3 years, and you have to supply the content and styling yourself. Let us handle it for you.</p>
+                <br>
+                <p> Additionally, if you already have your domain and hosting, our services become that much cheaper! </p>
             </div>
         </div>
 
@@ -105,7 +140,7 @@
     <div class="section no-pad-bot">
         <div class="container">
             <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light">A perfect blend between Information & Material Design</h5>
             </div>
         </div>
     </div>
