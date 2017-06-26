@@ -33,6 +33,16 @@ p {
     width: 100%;
   }
 
+.nav-wrapper .brand-logo img {
+  height: 64px;
+}
+
+@media (max-width: 600px) {
+.nav-wrapper .brand-logo img {
+    height: 56px;
+  }
+}
+
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;

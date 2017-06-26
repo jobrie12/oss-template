@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1240d8c2-bd34-4306-9e40-1d144ac3f7f1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/angular-ui-router.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/progressbar.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/sugar.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/background1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/background2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/space-background.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/space-background2.jpeg" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/sugar.min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/sugar.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/mail_handler.php" afterPath="$PROJECT_DIR$/server/mail_handler.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/about.tpl.html" afterPath="$PROJECT_DIR$/templates/about.tpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/contact.tpl.html" afterPath="$PROJECT_DIR$/templates/contact.tpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home.tpl.html" afterPath="$PROJECT_DIR$/templates/home.tpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/samples.tpl.html" afterPath="$PROJECT_DIR$/templates/samples.tpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/services.tpl.html" afterPath="$PROJECT_DIR$/templates/services.tpl.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,8 +25,8 @@
             <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/index.html">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="584">
-                    <caret line="102" column="43" lean-forward="true" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
+                  <state relative-caret-position="-231">
+                    <caret line="40" column="11" lean-forward="true" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
                     <folding>
                       <element signature="n#style#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                       <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -56,34 +46,24 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="121" column="67" lean-forward="true" selection-start-line="121" selection-start-column="67" selection-end-line="121" selection-end-column="67" />
+            <state relative-caret-position="451">
+              <caret line="85" column="34" lean-forward="false" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
-                <element signature="e#4240#8632#0" expanded="false" />
+                <element signature="e#4267#8659#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sugar.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/sugar.js">
+      <file leaf-file-name="sugar.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/sugar.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1144">
-              <caret line="13406" column="14" lean-forward="false" selection-start-line="13406" selection-start-column="14" selection-end-line="13406" selection-end-column="14" />
+            <state relative-caret-position="829">
+              <caret line="131" column="317" lean-forward="false" selection-start-line="131" selection-start-column="317" selection-end-line="131" selection-end-column="317" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="angular-ui-router.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/angular-ui-router.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -133,11 +113,21 @@
       <file leaf-file-name="about.tpl.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/about.tpl.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="273">
+              <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
               <folding>
-                <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="882">
+              <caret line="42" column="3" lean-forward="true" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -179,6 +169,7 @@
       <find>projects</find>
       <find>href=&quot;/</find>
       <find>ng-hide</find>
+      <find>daysAgo</find>
     </findStrings>
     <replaceStrings>
       <replace>samples</replace>
@@ -201,16 +192,16 @@
         <option value="$PROJECT_DIR$/mail_handler.php" />
         <option value="$PROJECT_DIR$/server/mail_handler.php" />
         <option value="$PROJECT_DIR$/js/angular-ui-router.min.js" />
-        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/templates/contact.tpl.html" />
         <option value="$PROJECT_DIR$/templates/samples.tpl.html" />
         <option value="$PROJECT_DIR$/templates/home.tpl.html" />
         <option value="$PROJECT_DIR$/templates/services.tpl.html" />
         <option value="$PROJECT_DIR$/js/progressbar.min.js" />
-        <option value="$PROJECT_DIR$/templates/about.tpl.html" />
+        <option value="$PROJECT_DIR$/js/sugar.js" />
         <option value="$PROJECT_DIR$/js/sugar.min.js" />
         <option value="$PROJECT_DIR$/js/app.js" />
-        <option value="$PROJECT_DIR$/js/sugar.js" />
+        <option value="$PROJECT_DIR$/templates/about.tpl.html" />
+        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -223,8 +214,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="40" />
-    <option name="width" value="1828" />
+    <option name="x" value="778" />
+    <option name="width" value="1090" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -788,15 +779,15 @@
       <workItem from="1498362190599" duration="6384000" />
       <workItem from="1498369629207" duration="15253000" />
       <workItem from="1498411677785" duration="5743000" />
-      <workItem from="1498434235890" duration="26751000" />
+      <workItem from="1498434235890" duration="28817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65154000" />
+    <option name="totallyTimeSpent" value="67220000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="40" y="0" width="1828" height="1038" extended-state="0" />
+    <frame x="778" y="0" width="1090" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -813,7 +804,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15082873" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25466418" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24985932" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -898,7 +889,7 @@
           <caret line="111" column="46" lean-forward="true" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
-            <element signature="e#4240#8632#0" expanded="false" />
+            <element signature="e#4267#8659#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -924,7 +915,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -965,7 +956,7 @@
           <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
-            <element signature="e#4240#8632#0" expanded="false" />
+            <element signature="e#4267#8659#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -991,7 +982,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1024,7 +1015,7 @@
           <caret line="33" column="50" lean-forward="false" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
-            <element signature="e#4240#8632#0" expanded="false" />
+            <element signature="e#4267#8659#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1056,7 +1047,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1166,6 +1157,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1190,14 +1182,6 @@
     <entry file="file://$PROJECT_DIR$/images/space-background-min.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/contact.tpl.html">
@@ -1253,52 +1237,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/about.tpl.html">
+    <entry file="file://$PROJECT_DIR$/js/sugar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="83">
+          <caret line="2743" column="0" lean-forward="false" selection-start-line="2743" selection-start-column="0" selection-end-line="2743" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/sugar.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2289">
-          <caret line="109" column="22" lean-forward="false" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="829">
+          <caret line="131" column="317" lean-forward="false" selection-start-line="131" selection-start-column="317" selection-end-line="131" selection-end-column="317" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="121" column="67" lean-forward="true" selection-start-line="121" selection-start-column="67" selection-end-line="121" selection-end-column="67" />
+        <state relative-caret-position="451">
+          <caret line="85" column="34" lean-forward="false" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
-            <element signature="e#4240#8632#0" expanded="false" />
+            <element signature="e#4267#8659#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/about.tpl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="42" column="3" lean-forward="true" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="102" column="43" lean-forward="true" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
+        <state relative-caret-position="-231">
+          <caret line="40" column="11" lean-forward="true" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
           <folding>
             <element signature="n#style#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/sugar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1144">
-          <caret line="13406" column="14" lean-forward="false" selection-start-line="13406" selection-start-column="14" selection-end-line="13406" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

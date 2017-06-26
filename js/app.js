@@ -115,7 +115,7 @@ app.controller('AboutCtrl', [
             var setup = createSetup('years', 12);
             var setup2 = createSetup('gallons', 300);
             var setup3 = createSetup('chickens', 15);
-            var setup4 = createSetup('/365', 365);
+            var setup4 = createSetup('/365 days', 365);
             var bar = new ProgressBar.Line('#container', setup);
             var bar2 = new ProgressBar.Line('#container2', setup2);
             var bar3 = new ProgressBar.Line('#container3', setup3);
@@ -123,9 +123,9 @@ app.controller('AboutCtrl', [
             bar.animate(.75);  // Number from 0.0 to 1.0
             bar2.animate(105/300.0);  // Number from 0.0 to 1.0
             bar3.animate(13/15.0);  // Number from 0.0 to 1.0
-            var dayAgo = (new Sugar.Date.create('October 6, 2016')).daysAgo();
 
-            console.log(dayAgo);
+            var dayAgo = Date.create('October 6, 2016').daysAgo();
+            bar4.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
         }
 
         init();
