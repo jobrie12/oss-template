@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-content">
                     <p>Hello, I have been performing professional web development work for over 4 years now, and I believe
-                        everyone deserves access to the best technologies to run their business. Having lived in Huntingtown, MD my entire life,
+                        everyone deserves access to the best technologies to run their business. Having lived in Huntingtown my entire life,
                         Oneiros is my way to help local businesses and entrepreneurs in Southern Maryland receive the web presence they deserve. <br>
                         <a href="https://www.linkedin.com/in/bryantobrien" target="_blank">LinkedIn</a>
                     </p>
@@ -46,16 +46,36 @@
 
                         </div>
                         <br>
-                        Gallons of Beer Brewed
+                        Gallons of Beer Brewed <a data-ng-click="playVideo('brewing')" class="btn-floating btn-small waves-effect waves-light blue">
+                        <i class="material-icons">play_circle_outline</i></a>
                         <div id="container2">
 
                         </div>
                         <br>
-                        Chickens Owned
+                        Chickens Owned <a data-ng-click="playVideo('chickens')" class="btn-floating btn-small waves-effect waves-light blue">
+                        <i class="material-icons">play_circle_outline</i></a>
                         <div id="container3">
 
                         </div>
                         <br>
+                        <br>
+                        <div class="row">
+                            <div class="col l6 m12">
+                                <video id="brewingVideo" class="responsive-video" width="100%" data-ng-show="playing['brewing']">
+                                    <source src="videos/brewing.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+
+                            </div>
+                            <div class="col l6 m12">
+                                <video id="chickensVideo" class="responsive-video" data-ng-show="playing['chickens']">
+                                    <source src="videos/chickens.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

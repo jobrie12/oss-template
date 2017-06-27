@@ -65,6 +65,22 @@ app.controller('AboutCtrl', [
     function($scope, $state){
 
         $scope.Date = Date;
+        $scope.playing = {
+            brewing: false,
+            chickens: false
+        };
+
+        $scope.playVideo = function(video){
+            var vid = document.getElementById(video + "Video");
+            vid.addEventListener('ended',myHandler,false);
+            function myHandler(e) {
+                $scope.playing[video] = false;
+                $scope.$apply();
+            }
+            vid.volume = 0.0;
+            $scope.playing[video] = true;
+            vid.play();
+        };
 
         function createSetup(units, scale){
 
@@ -215,7 +231,7 @@ app.controller('ContactCtrl', [
             if (toast.length > 0){
                 toast = toast.slice(0, -1);
                 Materialize.toast("Please fill out the " + toast + " fields before submitting.", 5000, 'rounded red')
-            }else if ($scope.followUp != "E-mail" && $scope.phone.length < 1){
+            }else if ($scope.followUp != "E-Mail" && $scope.phone.length < 1){
                 Materialize.toast("If you want us to follow up by phone, we will need a phone #", 5000, 'rounded red')
             }
             else {
@@ -300,7 +316,20 @@ app.controller('HomeCtrl', [
 app.controller('SamplesCtrl', [
     '$scope',
     '$state',
-    function($scope, $state){
+    '$http',
+    '$window',
+    function($scope, $state, $http, $window){
+        $scope.sampleCode = "";
+        $scope.fetchDemo = function() {
+            $http.get('templates/samples/'+$scope.sampleCode+'.tpl.html').then(function successCallback(response) {
+                $window.href='#/samples/'+$scope.sampleCode;
+                    Materialize.toast("Template was found!", 5000, 'rounded green');
+                }, function errorCallback(response) {
+                    Materialize.toast("No Demos were found with that code, sorry.", 5000, 'rounded red');
+                }
+
+            );
+        }
     }]);
 
 app.controller('ServicesCtrl', [

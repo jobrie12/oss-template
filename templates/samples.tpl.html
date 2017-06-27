@@ -1,5 +1,24 @@
 <div class="container">
     <div class="page-header">
         <h3 class="teal-text darken-4">Samples</h3>
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel teal z-depth-5 center">
+                          <span class="white-text">To protect the privacy of all of our potential customers,
+                              we won't display our client-specific examples in the open. To view your specific demo,
+                              please enter the code that was supplied to you by us.
+                          </span>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col offset-l4 l4 offset-s3 s6 white-text">
+                            <input id="sample" type="text" class="validate white-text center" data-ng-model="sampleCode">
+                            <label for="sample" class="white-text center">Sample Code</label>
+                        </div>
+                    </div>
+                    <a class="waves-effect waves-light btn-large" data-ng-click="fetchDemo()">
+                        <i class="material-icons right">call_made</i>Fetch Demo</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
