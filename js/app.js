@@ -37,7 +37,54 @@ app.config([
                 url: '/samples',
                 templateUrl: 'templates/samples.tpl.html',
                 controller: 'SamplesCtrl'
-            });
+            })
+            .state('demo', {
+                url: '/samples/{id}',
+                templateUrl: function($stateParams){
+                    return 'templates/samples/'+$stateParams.id + '/index.tpl.html'
+                },
+                resolve: {
+                    controllerName: ['$stateParams', '$timeout','$q',
+                        function ($stateParams, $timeout, $q)
+                        {
+                            var deferred = $q.defer();
+                            $timeout(function(){
+
+                                deferred.resolve($stateParams.id + 'Ctrl');
+
+                            },250);
+                            return deferred.promise;
+                        }
+                    ],
+                },
+                controllerProvider:['controllerName', function (controllerName)
+                {
+                    return controllerName;
+                }]
+            }).state('demopage', {
+                url: '/samples/{id}/{page}',
+                templateUrl: function($stateParams){
+                    return 'templates/samples/'+$stateParams.id + '/'+$stateParams.page+'.tpl.html'
+                },
+                resolve: {
+                    controllerName: ['$stateParams', '$timeout','$q',
+                        function ($stateParams, $timeout, $q)
+                        {
+                            var deferred = $q.defer();
+                            $timeout(function(){
+
+                                deferred.resolve($stateParams.id + 'Ctrl');
+
+                            },250);
+                            return deferred.promise;
+                        }
+                    ]
+                },
+                controllerProvider:['controllerName', function (controllerName)
+                {
+                    return controllerName;
+                }]
+        });
 
         $urlRouterProvider.otherwise('home');
     }]);
@@ -321,9 +368,8 @@ app.controller('SamplesCtrl', [
     function($scope, $state, $http, $window){
         $scope.sampleCode = "";
         $scope.fetchDemo = function() {
-            $http.get('templates/samples/'+$scope.sampleCode+'.tpl.html').then(function successCallback(response) {
-                $window.href='#/samples/'+$scope.sampleCode;
-                    Materialize.toast("Template was found!", 5000, 'rounded green');
+            $http.get('templates/samples/'+$scope.sampleCode+'/index.tpl.html').then(function successCallback(response) {
+                    $state.go('demo', {id:$scope.sampleCode});
                 }, function errorCallback(response) {
                     Materialize.toast("No Demos were found with that code, sorry.", 5000, 'rounded red');
                 }
@@ -342,3 +388,17 @@ app.controller('ServicesCtrl', [
 
         init();
     }]);
+
+app.controller('chessiesCtrl', [
+    '$scope',
+    '$state',
+    function($scope, $state){
+        $scope.id = "CHEEEEEEESSSIIIIIESSSS";
+
+        function init(){
+
+        }
+
+        init();
+    }]
+);
