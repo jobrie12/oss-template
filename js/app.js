@@ -395,10 +395,14 @@ app.controller('chessiesCtrl', [
     function($scope, $state){
         $scope.id = "CHEEEEEEESSSIIIIIESSSS";
 
-        function init(){
-
+        function init()
+        {
+            $('.collapsible').collapsible();
+            $('select').material_select();
         }
+
 
         init();
     }]
 );
+
