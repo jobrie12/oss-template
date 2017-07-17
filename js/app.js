@@ -183,12 +183,18 @@ app.controller('AboutCtrl', [
             var setup2 = createSetup('gallons', 300);
             var setup3 = createSetup('chickens', 15);
             var setup4 = createSetup('/365 days', 365);
+            var setup6 = createSetup('dogs', 50);
+            var setup7 = createSetup('books', 30);
+            var setup8 = createSetup('/365 days', 365);
             var bar = new ProgressBar.Line('#container', setup);
             var bar2 = new ProgressBar.Line('#container2', setup2);
             var bar3 = new ProgressBar.Line('#container3', setup3);
             var bar4 = new ProgressBar.Line('#container4', setup4);
             var bar5 = new ProgressBar.Line('#container5', setup4);
+            var bar6 = new ProgressBar.Line('#container6', setup6);
+            var bar7 = new ProgressBar.Line('#container7', setup7);
             bar.animate(.75);  // Number from 0.0 to 1.0
+
             bar2.animate(105/300.0);  // Number from 0.0 to 1.0
             bar3.animate(13/15.0);  // Number from 0.0 to 1.0
 
@@ -196,7 +202,11 @@ app.controller('AboutCtrl', [
             bar4.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
             var dayAgo = Date.create('December 9, 2016').daysAgo();
             bar5.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
+            bar6.animate(3/50);  // Number from 0.0 to 1.0
+            bar7.animate(5/30);  // Number from 0.0 to 1.0
+
         }
+
 
         init();
     }]);
@@ -419,8 +429,6 @@ app.controller('chessiesCtrl', [
     }]
 );
 
-<<<<<<< HEAD
-=======
 app.controller('demo-firmCtrl', [
     '$scope',
     '$state',
@@ -461,8 +469,6 @@ app.controller('demo-firmCtrl', [
     }]
 );
 
-<<<<<<< HEAD
-=======
 app.controller('demo-firmCtrl', [
     '$scope',
     '$state',
@@ -513,7 +519,6 @@ app.controller('demo-firmCtrl', [
     }]
 );
 
->>>>>>> master
 app.controller('ubblsaCtrl', [
     '$scope',
     '$state',
@@ -739,9 +744,6 @@ app.controller('ubblsaCtrl', [
         init();
     }]
 );
-<<<<<<< HEAD
->>>>>>> master
-=======
 
 app.controller('parchitectsCtrl', [
     '$scope',
@@ -751,4 +753,3 @@ app.controller('parchitectsCtrl', [
 
     }]
 );
->>>>>>> master
