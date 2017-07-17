@@ -177,6 +177,8 @@ app.controller('AboutCtrl', [
 
         function init(){
 
+            Sugar.extend();
+
             var setup = createSetup('years', 12);
             var setup2 = createSetup('gallons', 300);
             var setup3 = createSetup('chickens', 15);
@@ -363,7 +365,6 @@ app.controller('HomeCtrl', [
         $scope.total = 0.00;
         function init() {
             $('.parallax').parallax();
-
             $scope.quote.forEach(function(item){
                 $scope.total += (item.rate * item.quantity);
             });
@@ -460,6 +461,59 @@ app.controller('demo-firmCtrl', [
     }]
 );
 
+<<<<<<< HEAD
+=======
+app.controller('demo-firmCtrl', [
+    '$scope',
+    '$state',
+    '$location',
+    function($scope, $state, $location){
+
+        $scope.projects = [
+            {
+                "name":"abbot",
+                "title": "Abbot Residence",
+                "image": "images/abbot.jpg"
+            },
+            {
+                "name":"coffin",
+                "title": "Coffin Residence",
+                "image": "images/coffin.jpg"
+            },
+            {
+                "name":"ellison",
+                "title": "Ellison Residence",
+                "image": "images/ellison.jpg"
+            }
+        ];
+
+        $scope.changeText = function(isTrue, number){
+            if (isTrue && number > 5){
+                console.log("Wow this is true and greater than 5!");
+                $scope.ourText= number + " is indeed greater than 5!";
+            }
+
+        };
+
+        $scope.ourText = "";
+
+        $scope.isActive = function (name){
+           if( $location.url().indexOf(name) != -1){
+                return 'active';
+           } else if (name === 'home' && $location.url().split("/").length - 1 == 2){
+               return 'active';
+           }
+        };
+
+        function init(){
+
+        }
+
+        init();
+    }]
+);
+
+>>>>>>> master
 app.controller('ubblsaCtrl', [
     '$scope',
     '$state',
@@ -683,6 +737,18 @@ app.controller('ubblsaCtrl', [
         };
 
         init();
+    }]
+);
+<<<<<<< HEAD
+>>>>>>> master
+=======
+
+app.controller('parchitectsCtrl', [
+    '$scope',
+    '$state',
+    '$location',
+    function($scope, $state, $location){
+
     }]
 );
 >>>>>>> master
