@@ -9,42 +9,83 @@
             University of Baltimore Black Law Students Association
         </p>
     </div>
-    <nav class="blue-grey">
+    <nav class="blue-grey darken-1">
         <div class="nav-wrapper" style="padding-left: 10px; padding-right: 10px;">
             <a style="padding-left: 20px;" id="logo-container" href="#/samples/ubblsa" class="brand-logo">
-                <img class="responsive-img" id="logo" height="64px" src="images/samples/ubblsa/ubblsa.jpg"/>
+                <img class="responsive-img" id="logo" height="64px" src="images/samples/ubblsa/ubblsa.png"/>
             </a>
             <ul id="nav-original" class="right hide-on-med-and-down">
                 <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
                 <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a class="white-text" href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
                 <li class="{{isActive('events')}}"><a class="white-text" href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
                 <li class="{{isActive('contact')}}"><a class="white-text" href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
             </ul>
 
-            <ul id="nav-mobile" class="side-nav">
-                <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
-                <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
-                <li class="{{isActive('events')}}"><a class="white-text" href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
-                <li class="{{isActive('contact')}}"><a class="white-text" href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
+            <ul id="slide-out-ubblsa" class="side-nav">
+                <li class="{{isActive('home')}}"><a href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
+                <li class="{{isActive('about')}}"><a href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
+                <li class="{{isActive('events')}}"><a href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
+                <li class="{{isActive('contact')}}"><a href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
             </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="slide-out-ubblsa" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
     </nav>
-    <div class="container">
-        Well this is obviously where the content goes
+    <div class="container" style="width: 95%; margin-top: 20px;">
+        <div class="row">
+            <div class="col l4 m12 s12 hide-on-large-only">
+                <div class="card-panel blue-grey darken-3 z-depth-5" style="padding-top: 5px;">
+                    <h5 class="white-text">Upcoming Events</h5>
+                    <iframe src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=jamesbryantobrien%40gmail.com&amp;color=%232952A3&amp;ctz=America%2FNew_York"
+                            style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+            <div class="col l8 s12">
+                <div class="card-panel blue-grey darken-3 z-depth-5" style="padding-top: 5px;">
+                    <h5 class="white-text">Past Events</h5>
+                    <div class="row">
+                        <div class="col xl6 l6 m12 s12" data-ng-repeat="event in events">
+                            <div class="card white " >
+                                <div class="card-image clickable" data-ng-click="goToEvent(event)">
+                                    <img ng-src="{{event.image}}">
+
+                                </div>
+                                <div class="card-content" style="height: 12em; overflow: hidden; text-overflow: ellipsis;">
+                                    <span class="card-title clickable" data-ng-click="goToEvent(event)">{{event.title}} <span class="new badge blue" data-badge-caption=" photos">{{event.photos.length}}</span></span>
+                                    <label>{{event.date}}</label>
+                                    <p>{{event.desc}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a data-ng-click="goToEvent(event)" href="">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col l4 m12 s12 hide-on-med-and-down">
+                <div class="card-panel blue-grey darken-3 z-depth-5" style="padding-top: 5px;">
+                    <h5 class="white-text">Upcoming Events</h5>
+                    <iframe src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=jamesbryantobrien%40gmail.com&amp;color=%232952A3&amp;ctz=America%2FNew_York"
+                            style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer class="page-footer blue-grey">
+    <footer class="page-footer blue-grey darken-1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">UB BLSA</h5>
-                    <p class="grey-text text-lighten-4">Proudly serving all of specific region's needs since arbitrary year. </p>
+                    <p class="grey-text text-lighten-4">Founded in 1978, UB BLSA is a chapter of the National Black Law Students Association (NBLSA), a 501(c)(3) corporation serving the needs and goals of Black Law Students. </p>
                 </div>
                 <div class="col l3 s6">
                     <h5 class="white-text">Site Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa">Home</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/about">About BLSA</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/board">Meet the Board</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/events">Events</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/contact">Contact Us</a></li>
                     </ul>
@@ -52,10 +93,8 @@
                 <div class="col l3 s6">
                     <h5 class="white-text">Connect</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/about">About BLSA</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/events">Events</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/contact">Contact Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/ubblsa/">Facebook</a></li>
+                        <li><a class="grey-text text-lighten-3" href="mailto:ubblsa@gmail.com">E-Mail</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,4 +106,21 @@
             </div>
         </div>
     </footer>
+</div>
+
+<div id="events-modal" class="modal">
+    <div class="modal-content">
+        <h4>{{selectedEvent.title}}</h4>
+        <div class="slider" slider>
+            <ul class="slides">
+                <li data-ng-repeat="photo in selectedEvent.photos track by $index">
+                    <img data-ng-src="{{photo}}">
+                </li>
+            </ul>
+        </div>
+        <p>{{selectedEvent.desc}}</p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
 </div>

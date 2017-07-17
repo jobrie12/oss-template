@@ -9,110 +9,92 @@
             University of Baltimore Black Law Students Association
         </p>
     </div>
-    <nav class="blue-grey">
+    <nav class="blue-grey darken-1">
         <div class="nav-wrapper" style="padding-left: 10px; padding-right: 10px;">
             <a style="padding-left: 20px;" id="logo-container" href="#/samples/ubblsa" class="brand-logo">
-                <img class="responsive-img" id="logo" height="64px" src="images/samples/ubblsa/ubblsa.jpg"/>
+                <img class="responsive-img" id="logo" height="64px" src="images/samples/ubblsa/ubblsa.png"/>
             </a>
             <ul id="nav-original" class="right hide-on-med-and-down">
                 <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
                 <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a class="white-text" href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
                 <li class="{{isActive('events')}}"><a class="white-text" href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
                 <li class="{{isActive('contact')}}"><a class="white-text" href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
             </ul>
 
-            <ul id="nav-mobile" class="side-nav">
-                <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
-                <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
-                <li class="{{isActive('events')}}"><a class="white-text" href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
-                <li class="{{isActive('contact')}}"><a class="white-text" href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
+            <ul id="slide-out-ubblsa" class="side-nav">
+                <li class="{{isActive('home')}}"><a href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
+                <li class="{{isActive('about')}}"><a href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
+                <li class="{{isActive('events')}}"><a href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
+                <li class="{{isActive('contact')}}"><a href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
             </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="slide-out-ubblsa" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
     </nav>
-    <div class="container">
-        <div class="page-header">
-            <h3 class="white-text">Want to Join / Have Questions?</h3>
-            <h5 class="white-text">Feel free to fill out this contact form and we will be in touch with you shortly!</h5>
-        </div>
-        <div class="row">
-            <form class="col s12" data-ng-submit="generateEmail()">
-                <div class="card z-depth-5">
-                    <div class="card-content">
-                        <span class="card-title">Submit Form to Send E-mail</span>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="name" type="text" data-ng-model="name" class="validate">
-                                <label for="name">Name</label>
+    <div class="container" style="margin-top: 40px;">
+        <div class="card-panel blue-grey darken-3 z-depth-5">
+            <div class="page-header center">
+                <h3 class="white-text">Want to Join / Have Questions?</h3>
+                <h5 class="blue-grey-text text-lighten-2">Feel free to fill out this contact form and we will be in touch with you shortly!</h5>
+            </div>
+            <div class="row">
+                <form class="col s12" data-ng-submit="generateEmail()">
+                    <div class="card z-depth-5">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="name" type="text" data-ng-model="name" class="validate">
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="email" type="text" data-ng-model="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="business" type="text" data-ng-model="business" class="validate">
-                                <label for="business">Business (Optional)</label>
+                            <div class="row">
+                                <div class="col s6 m3" data-ng-repeat="service in serviceOptions">
+                                    <input type="checkbox" id="{{service.name}}" data-ng-model="service.value" />
+                                    <label for="{{service.name}}">{{service.name}}</label>
+                                </div>
                             </div>
+                            <div class="row" data-ng-show="serviceOptions[1].value">
+                                <div class="input-field col s12">
+                                    <input id="website" type="text" data-ng-model="website" class="validate">
+                                    <label for="website">Current Website</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="textarea1" class="materialize-textarea" data-ng-model="other"></textarea>
+                                    <label for="textarea1">Additional Information (Optional)</label>
+                                </div>
+                            </div>
+                            <div vc-recaptcha key="publicKey"></div>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="email" type="text" data-ng-model="email" class="validate">
-                                <label for="email">Email</label>
-                            </div>
+                        <div class="card-action">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Send E-mail
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <select name="Follow Up" data-ng-model="followUp">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="E-Mail">E-Mail</option>
-                                    <option value="Call">Call</option>
-                                    <option value="Text">Text</option>
-                                </select>
-                                <label>How Should We Follow Up?</label>
-                            </div>
-
-                            <div class="input-field col s6">
-                                <input id="phone" type="text" data-ng-model="phone" class="validate">
-                                <label for="phone">Phone (Optional)</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s6 m3" data-ng-repeat="service in serviceOptions">
-                                <input type="checkbox" id="{{service.name}}" data-ng-model="service.value" />
-                                <label for="{{service.name}}">{{service.name}}</label>
-                            </div>
-                        </div>
-                        <div class="row" data-ng-show="serviceOptions[1].value">
-                            <div class="input-field col s12">
-                                <input id="website" type="text" data-ng-model="website" class="validate">
-                                <label for="website">Current Website</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea" data-ng-model="other"></textarea>
-                                <label for="textarea1">Additional Information (Optional)</label>
-                            </div>
-                        </div>
-                        <div vc-recaptcha key="publicKey"></div>
                     </div>
-                    <div class="card-action">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-    <footer class="page-footer blue-grey">
+    <footer class="page-footer blue-grey darken-1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">UB BLSA</h5>
-                    <p class="grey-text text-lighten-4">Proudly serving all of specific region's needs since arbitrary year. </p>
+                    <p class="grey-text text-lighten-4">Founded in 1978, UB BLSA is a chapter of the National Black Law Students Association (NBLSA), a 501(c)(3) corporation serving the needs and goals of Black Law Students. </p>
                 </div>
                 <div class="col l3 s6">
                     <h5 class="white-text">Site Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa">Home</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/about">About BLSA</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/board">Meet the Board</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/events">Events</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/contact">Contact Us</a></li>
                     </ul>
@@ -120,10 +102,8 @@
                 <div class="col l3 s6">
                     <h5 class="white-text">Connect</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/about">About BLSA</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/events">Events</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/contact">Contact Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/ubblsa/">Facebook</a></li>
+                        <li><a class="grey-text text-lighten-3" href="mailto:ubblsa@gmail.com">E-Mail</a></li>
                     </ul>
                 </div>
             </div>

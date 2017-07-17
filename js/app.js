@@ -101,7 +101,9 @@ app.controller('NavCtrl', [
         };
 
         function init() {
-            $('.button-collapse').sideNav();
+            $(".button-collapse").sideNav({
+                closeOnClick: true
+            });
         }
         init();
     }]);
@@ -458,16 +460,15 @@ app.controller('ubblsaCtrl', [
     '$state',
     '$location',
     function($scope, $state, $location){
+    
+        $scope.Date = Date;
 
         $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
         $scope.serviceOptions = [
-            {name:'New Website', value:false},
-            {name:'Website Redesign', value:false},
-            {name:'Logo/Graphic Design', value:false},
-            {name:'Eat24 Online Order Integration', value:false},
-            {name:'E-Commerce', value:false},
-            {name:'E-Mail Outreach', value:false},
-            {name:'Web Training', value:false},
+            {name:'Want to Join', value:false},
+            {name:'Talk about Event', value:false},
+            {name:'General Questions', value:false},
+            {name:'Comments', value:false},
             {name:'Other', value:false}
         ];
         $scope.name = "";
@@ -481,32 +482,166 @@ app.controller('ubblsaCtrl', [
         $scope.captchaValue = null;
         $scope.publicKey = "6LdqFScUAAAAAOcHxta8OI1DCCbF5IJ_iRT8ApQD";
 
+        $scope.board = [
+            {
+                name:"Brandon Cahee",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "President"
+            },
+            {
+                name:"Eroncia Berry",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Vice President"
+            },
+            {
+                name:"Alyxandrya McClelland",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Treasurer"
+            },
+            {
+                name:"Hamda Hussein",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Academic Affairs"
+            },
+            {
+                name:"Dytonia Reed",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Community Service"
+            },
+            {
+                name:"D'ereka Bolden",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Programming"
+            },
+            {
+                name:"Usman Suleman",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Public Relations"
+            },
+            {
+                name:"Edward Shields",
+                pos: "Day Student Representative",
+                photo: "images/samples/ubblsa/edshields.jpg",
+                linkedin: 'https://www.linkedin.com/in/edward-shields-3b96b2125',
+                desc: "I am a law student at the University of Baltimore with an interest in Criminal Law as well as Criminology. " +
+                "My vision is to become an accomplished lawyer while giving back to the community monetarily and physically as well as with pro bono legal advice."
+            },
+            {
+                name:"Kimetha Payton",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Evening Representative"
+            },
+            {
+                name:"Tashani Dickson",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Historian"
+            }
+        ];
+
+        $scope.selectedMember = $scope.board[7];
+
+        $scope.selectMember = function(member){
+            $scope.selectedMember = member;
+        }
+
+        $scope.events = [{
+            image:"images/samples/ubblsa/board-retreat.jpg",
+            title: "Board Retreat",
+            date: "July 7th, 2017",
+            desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+            "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+            "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+            "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+            "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+            "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+            "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+            photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg"]
+        },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 2",
+                date: "July 4th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg"]
+            },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 3",
+                date: "June 15th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",]
+            },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 4",
+                date: "May 8th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg",]
+            }];
+
+        $scope.selectedEvent = $scope.events[0];
+
         function init(){
             $(document).ready(function() {
                 $('select').material_select();
+                $('.slider').slider();
+                $('.materialboxed').materialbox();
+                $('.modal').modal();
+                $(".button-collapse").sideNav({
+                    closeOnClick: true
+                });
             });
         }
 
         function clearForm() {
             $scope.serviceOptions = [
-                {name:'New Website', value:false},
-                {name:'Website Redesign', value:false},
-                {name:'Logo/Graphic Design', value:false},
-                {name:'Eat24 Online Order Integration', value:false},
-                {name:'E-Commerce', value:false},
-                {name:'E-Mail Outreach', value:false},
-                {name:'Web Training', value:false},
+                {name:'Want to Join', value:false},
+                {name:'Talk about Event', value:false},
+                {name:'General Questions', value:false},
+                {name:'Comments', value:false},
                 {name:'Other', value:false}
             ];
             $scope.name = "";
             $scope.phone = "";
             $scope.email = "";
             $scope.website = "";
-            $scope.business = "";
             $scope.followUp = "";
             $scope.other = "";
             $scope.services = "";
         }
+
+        $scope.goToEvent = function(event) {
+            $scope.selectedEvent = event;
+            Materialize.toast("This would navigate to Event Page for " + event.title
+                + " and have the gallery of photos and full description.", 10000, 'rounded green');
+            //$state.go('demopage', {id:'ubblsa', page:'event'});
+            //$('#events-modal').modal('open');
+        };
 
         $scope.generateEmail = function(){
 
