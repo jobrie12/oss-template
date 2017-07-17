@@ -1,7 +1,7 @@
 /**
  * Created by james on 6/24/2017.
  */
-var app = angular.module('oneiros', ['ui.router']);
+var app = angular.module('oneiros', ['ui.router', 'vcRecaptcha']);
 
 app.config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
@@ -101,7 +101,9 @@ app.controller('NavCtrl', [
         };
 
         function init() {
-            $('.button-collapse').sideNav();
+            $(".button-collapse").sideNav({
+                closeOnClick: true
+            });
         }
         init();
     }]);
@@ -138,7 +140,7 @@ app.controller('AboutCtrl', [
                 strokeWidth: 2,
                 trailWidth: 1,
                 easing: 'easeInOut',
-                duration: 3400,
+                duration: 2000,
                 svgStyle: {width: '100%', height: '100%'},
                 text: {
                     style: {
@@ -183,12 +185,15 @@ app.controller('AboutCtrl', [
             var bar2 = new ProgressBar.Line('#container2', setup2);
             var bar3 = new ProgressBar.Line('#container3', setup3);
             var bar4 = new ProgressBar.Line('#container4', setup4);
+            var bar5 = new ProgressBar.Line('#container5', setup4);
             bar.animate(.75);  // Number from 0.0 to 1.0
             bar2.animate(105/300.0);  // Number from 0.0 to 1.0
             bar3.animate(13/15.0);  // Number from 0.0 to 1.0
 
             var dayAgo = Date.create('October 6, 2016').daysAgo();
             bar4.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
+            var dayAgo = Date.create('December 9, 2016').daysAgo();
+            bar5.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
         }
 
         init();
@@ -199,7 +204,8 @@ app.controller('ContactCtrl', [
     '$state',
     '$window',
     '$http',
-    function($scope, $state, $window, $http){
+    'vcRecaptchaService',
+    function($scope, $state, $window, $http, vcRecaptchaService){
         $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
         $scope.serviceOptions = [
             {name:'New Website', value:false},
@@ -219,6 +225,8 @@ app.controller('ContactCtrl', [
         $scope.followUp = "";
         $scope.other = "";
         $scope.services = "";
+        $scope.captchaValue = null;
+        $scope.publicKey = "6LdqFScUAAAAAOcHxta8OI1DCCbF5IJ_iRT8ApQD";
 
         function init(){
             $(document).ready(function() {
@@ -247,9 +255,12 @@ app.controller('ContactCtrl', [
             $scope.followUp = "";
             $scope.other = "";
             $scope.services = "";
+            $scope.captchaValue = null;
         }
 
         $scope.generateEmail = function(){
+
+            console.log($scope.captchaValue);
 
             $scope.serviceOptions.forEach(function(n){
                if(n.value){
@@ -261,9 +272,6 @@ app.controller('ContactCtrl', [
 
             if ($scope.name.length < 1){
                 toast += " name,"
-            }
-            if ($scope.business.length < 1) {
-                toast += " business,"
             }
             if ($scope.email.length < 1) {
                 toast += " email,"
@@ -280,7 +288,9 @@ app.controller('ContactCtrl', [
                 Materialize.toast("Please fill out the " + toast + " fields before submitting.", 5000, 'rounded red')
             }else if ($scope.followUp != "E-Mail" && $scope.phone.length < 1){
                 Materialize.toast("If you want us to follow up by phone, we will need a phone #", 5000, 'rounded red')
-            }
+            } /*else if(vcRecaptchaService.getResponse() === ""){
+                Materialize.toast("Please resolve the captcha before submitting", 5000, 'rounded red')
+            }*/
             else {
                 $scope.services = $scope.services.slice(0, -2);
                 $http({
@@ -295,6 +305,7 @@ app.controller('ContactCtrl', [
                         followUp: $scope.followUp,
                         services: $scope.services,
                         other: $scope.other
+                        //gcaptcharesponse: vcRecaptchaService.getResponse()
                     }
                 }).then(function successCallback(response) {
                         if (response.data.indexOf('Failed') != -1){
@@ -305,6 +316,7 @@ app.controller('ContactCtrl', [
                             clearForm();
                         }
                     }, function errorCallback(response) {
+                        console.log(response.message);
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
                         Materialize.toast("ERROR: " + response.data, 5000, 'rounded red')
@@ -406,3 +418,271 @@ app.controller('chessiesCtrl', [
     }]
 );
 
+<<<<<<< HEAD
+=======
+app.controller('demo-firmCtrl', [
+    '$scope',
+    '$state',
+    '$location',
+    function($scope, $state, $location){
+
+        $scope.projects = [
+            {
+                "name":"abbot",
+                "title": "Abbot Residence",
+                "image": "images/abbot.jpg"
+            },
+            {
+                "name":"coffin",
+                "title": "Coffin Residence",
+                "image": "images/coffin.jpg"
+            },
+            {
+                "name":"ellison",
+                "title": "Ellison Residence",
+                "image": "images/ellison.jpg"
+            }
+        ];
+
+        $scope.isActive = function (name){
+           if( $location.url().indexOf(name) != -1){
+                return 'active';
+           } else if (name === 'home' && $location.url().split("/").length - 1 == 2){
+               return 'active';
+           }
+        };
+
+        function init(){
+
+        }
+
+        init();
+    }]
+);
+
+app.controller('ubblsaCtrl', [
+    '$scope',
+    '$state',
+    '$location',
+    function($scope, $state, $location){
+    
+        $scope.Date = Date;
+
+        $scope.followUpOptions = ['E-mail', 'Call', 'Text'];
+        $scope.serviceOptions = [
+            {name:'Want to Join', value:false},
+            {name:'Talk about Event', value:false},
+            {name:'General Questions', value:false},
+            {name:'Comments', value:false},
+            {name:'Other', value:false}
+        ];
+        $scope.name = "";
+        $scope.phone = "";
+        $scope.email = "";
+        $scope.website = "";
+        $scope.business = "";
+        $scope.followUp = "";
+        $scope.other = "";
+        $scope.services = "";
+        $scope.captchaValue = null;
+        $scope.publicKey = "6LdqFScUAAAAAOcHxta8OI1DCCbF5IJ_iRT8ApQD";
+
+        $scope.board = [
+            {
+                name:"Brandon Cahee",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "President"
+            },
+            {
+                name:"Eroncia Berry",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Vice President"
+            },
+            {
+                name:"Alyxandrya McClelland",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Treasurer"
+            },
+            {
+                name:"Hamda Hussein",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Academic Affairs"
+            },
+            {
+                name:"Dytonia Reed",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Community Service"
+            },
+            {
+                name:"D'ereka Bolden",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Programming"
+            },
+            {
+                name:"Usman Suleman",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Director of Public Relations"
+            },
+            {
+                name:"Edward Shields",
+                pos: "Day Student Representative",
+                photo: "images/samples/ubblsa/edshields.jpg",
+                linkedin: 'https://www.linkedin.com/in/edward-shields-3b96b2125',
+                desc: "I am a law student at the University of Baltimore with an interest in Criminal Law as well as Criminology. " +
+                "My vision is to become an accomplished lawyer while giving back to the community monetarily and physically as well as with pro bono legal advice."
+            },
+            {
+                name:"Kimetha Payton",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Evening Representative"
+            },
+            {
+                name:"Tashani Dickson",
+                photo: "images/samples/ubblsa/blank.png",
+                pos: "Historian"
+            }
+        ];
+
+        $scope.selectedMember = $scope.board[7];
+
+        $scope.selectMember = function(member){
+            $scope.selectedMember = member;
+        }
+
+        $scope.events = [{
+            image:"images/samples/ubblsa/board-retreat.jpg",
+            title: "Board Retreat",
+            date: "July 7th, 2017",
+            desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+            "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+            "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+            "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+            "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+            "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+            "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+            photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                "images/samples/ubblsa/board-retreat.jpg"]
+        },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 2",
+                date: "July 4th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg"]
+            },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 3",
+                date: "June 15th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",]
+            },
+            {
+                image:"images/samples/ubblsa/board-retreat.jpg",
+                title: "Event 4",
+                date: "May 8th, 2017",
+                desc: "On this past weekend, the University of Baltimore School of Law's Black Law Students Association (UB BLSA) " +
+                "Executive Board held our Board Retreat. During the retreat, the Board focused on ways to advance our vision of " +
+                "renewing our commitment to excellence through service in leadership by the building and engagement of our membership and alumni, " +
+                "our external community advocacy, our political involvement, and the building of strategic partnerships within our broader legal community. " +
+                "In the two day event, Board members participated in an strategy/planning session to prepare and map out events for the year, and to begin the " +
+                "work of the organization for the academic year. To culminate our work, we took part in a day of team building so that we could effectively learn " +
+                "skills, and tools to best advocate for our members. #UBBLSA #LEADERSHIPINSERVICE",
+                photos: ["images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg", "images/samples/ubblsa/board-retreat.jpg",
+                    "images/samples/ubblsa/board-retreat.jpg",]
+            }];
+
+        $scope.selectedEvent = $scope.events[0];
+
+        function init(){
+            $(document).ready(function() {
+                $('select').material_select();
+                $('.slider').slider();
+                $('.materialboxed').materialbox();
+                $('.modal').modal();
+                $(".button-collapse").sideNav({
+                    closeOnClick: true
+                });
+            });
+        }
+
+        function clearForm() {
+            $scope.serviceOptions = [
+                {name:'Want to Join', value:false},
+                {name:'Talk about Event', value:false},
+                {name:'General Questions', value:false},
+                {name:'Comments', value:false},
+                {name:'Other', value:false}
+            ];
+            $scope.name = "";
+            $scope.phone = "";
+            $scope.email = "";
+            $scope.website = "";
+            $scope.followUp = "";
+            $scope.other = "";
+            $scope.services = "";
+        }
+
+        $scope.goToEvent = function(event) {
+            $scope.selectedEvent = event;
+            Materialize.toast("This would navigate to Event Page for " + event.title
+                + " and have the gallery of photos and full description.", 10000, 'rounded green');
+            //$state.go('demopage', {id:'ubblsa', page:'event'});
+            //$('#events-modal').modal('open');
+        };
+
+        $scope.generateEmail = function(){
+
+            $scope.serviceOptions.forEach(function(n){
+                if(n.value){
+                    $scope.services += n.name + " | "
+                }
+            });
+
+            var toast = "";
+
+            if ($scope.name.length < 1){
+                toast += " name,"
+            }
+            if ($scope.email.length < 1) {
+                toast += " email,"
+            }
+
+            if (toast.length > 0){
+                toast = toast.slice(0, -1);
+                Materialize.toast("Please fill out the " + toast + " fields before submitting.", 5000, 'rounded red')
+            } else {
+                Materialize.toast("Thanks for the email, we'll get back to you shortly!", 5000, 'rounded green');
+                clearForm();
+            }
+        };
+
+        $scope.isActive = function (name){
+            if( $location.url().indexOf(name) != -1){
+                return 'active';
+            } else if (name === 'home' && $location.url().split("/").length - 1 == 2){
+                return 'active';
+            }
+        };
+
+        init();
+    }]
+);
+>>>>>>> master

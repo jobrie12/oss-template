@@ -2,12 +2,12 @@
     <div class="page-header">
         <h3 class="teal-text darken-4">Samples</h3>
         <div class="row">
-            <div class="col s12">
+            <form class="col s12" data-ng-submit="fetchDemo()">
                 <div class="card-panel teal z-depth-5 center">
-                          <span class="white-text">To protect the privacy of all of our potential customers,
-                              we won't display our client-specific examples in the open. To view your specific demo,
-                              please enter the code that was supplied to you by us.
-                          </span>
+                      <span class="white-text">To protect the privacy of all of our potential customers,
+                          we won't display our client-specific examples in the open. To view your specific demo,
+                          please enter the code that was supplied to you by us.
+                      </span>
                     <br>
                     <div class="row">
                         <div class="input-field col offset-l4 l4 offset-s3 s6 white-text">
@@ -15,10 +15,53 @@
                             <label for="sample" class="white-text center">Sample Code</label>
                         </div>
                     </div>
-                    <a class="waves-effect waves-light btn-large" data-ng-click="fetchDemo()">
-                        <i class="material-icons right">call_made</i>Fetch Demo</a>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Fetch Demo
+                        <i class="material-icons right">call_made</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!--
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="card z-depth-5 hoverable">
+                    <div class="card-image">
+                        <img src="images/restaurant-demo.jpeg">
+                        <a href="#/samples/demo-restaurant" class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">open_in_new</i></a>
+                    </div>
+                    <div class="card-content">
+                        <a href="#/samples/demo-rest" class="card-title">Restaurant Site</a>
+                        <p>This sample contains a mock-up for a basic restaurant site. Open this to see
+                            beautiful galleries, Google Map integration, and interactive menus. </p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col s12 m4">
+                <div class="card z-depth-5 hoverable">
+                    <div class="card-image">
+                        <img src="images/firm-demo.jpeg">
+                        <a href="#/samples/demo-firm" class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">open_in_new</i></a>
+                    </div>
+                    <div class="card-content">
+                        <a href="#/samples/demo-firm" class="card-title">Business Site</a>
+                        <p>This sample contains a mock-up for a basic consulting firm. Open this to see a clean professional layout,
+                        with consultation forms, past project galleries, and well organized content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card z-depth-5 hoverable">
+                    <div class="card-image">
+                        <img src="images/personal-demo.jpeg">
+                        <a href="#/samples/demo-personal" class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">open_in_new</i></a>
+                    </div>
+                    <div class="card-content">
+                        <a href="#/samples/demo-personal" class="card-title">Personal Site</a>
+                        <p>This sample contains a mock-up for a musician's personal site. Open this to see a catchy landing page,
+                            social media integration, and a media rich layout.</p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
     </div>
 </div>

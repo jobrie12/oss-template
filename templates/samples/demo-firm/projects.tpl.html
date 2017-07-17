@@ -1,0 +1,77 @@
+<style>
+
+</style>
+
+<div class="container z-depth-5" style="margin-bottom: 40px; width:90%; background-color: #37474f; border:5px solid #42a5f5;
+    margin-top:40px;">
+    <div class="row valign-wrapper" style="margin:0 0; background-color: #42A5F5;  max-height: 25px;">
+        <p class="white-text condensed left" style="padding-left: 10px;">
+            John Doe Consulting Firm
+        </p>
+    </div>
+    <nav class="blue-grey darken-1 z-depth-5">
+        <div class="nav-wrapper" style="padding-left: 10px; padding-right: 10px;">
+            <a href="#/samples/demo-firm" class="brand-logo white-text light right" data-ng-click="id='home';">JD Consulting</a>
+            <ul id="nav-mobile" class="left">
+                <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/demo-firm" data-ng-click="id='home';">Home</a></li>
+                <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/demo-firm/about" data-ng-click="id='about';">About</a></li>
+                <li class="{{isActive('projects')}}"><a class="white-text" href="#/samples/demo-firm/projects" data-ng-click="id='projects';">Projects</a></li>
+                <li class="{{isActive('consult')}}"><a class="white-text" href="#/samples/demo-firm/consult" data-ng-click="id='consult';">Consult</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="content" class="container" style="width:80%;">
+        <h4 class="white-text">Projects</h4>
+        <div class="row">
+            <div class="col xl3 l4 m6 s12">
+                <div class="card white">
+                    <div class="card-image">
+                        <img src="images/bryant-flag.jpg">
+                        <span class="card-title white-text">Bryant</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">open_in_new</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>Click to go to Bryant's Page</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col xl3 l4 m6 s12" data-ng-repeat="project in projects">
+                <div class="card white" style="height: 300px;">
+                    <div class="card-image">
+                        <img ng-src="{{project.image}}">
+                        <span class="card-title white-text">{{project.title}}</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">open_in_new</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>Click to go to {{project.title}}'s Page</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer blue-grey darken-1 z-depth-5">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">JD Consulting</h5>
+                    <p class="grey-text text-lighten-4">Proudly serving all of specific region's needs since arbitrary year. </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Site Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/demo-firm">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/demo-firm/about">About</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/demo-firm/projects">Projects</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/demo-firm/consult">Consult</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 JD Consulting
+                <a class="grey-text text-lighten-4 right" href="#">Back to Oneiros</a>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,111 @@
+<style>
+
+</style>
+
+<div class="container" style="margin-bottom: 40px; width:90%; background-color: #455a64; border:5px solid #42a5f5;
+    margin-top:40px;">
+    <div class="row valign-wrapper" style="margin:0 0; background-color: #42A5F5;  max-height: 25px;">
+        <p class="white-text condensed left" style="padding-left: 10px;">
+            University of Baltimore Black Law Students Association
+        </p>
+    </div>
+    <nav class="blue-grey darken-1">
+        <div class="nav-wrapper" style="padding-left: 10px; padding-right: 10px;">
+            <a style="padding-left: 20px;" id="logo-container" href="#/samples/ubblsa" class="brand-logo">
+                <img class="responsive-img" id="logo" height="64px" src="images/samples/ubblsa/ubblsa.png"/>
+            </a>
+            <ul id="nav-original" class="right hide-on-med-and-down">
+                <li class="{{isActive('home')}}"><a class="white-text" href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
+                <li class="{{isActive('about')}}"><a class="white-text" href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a class="white-text" href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
+                <li class="{{isActive('events')}}"><a class="white-text" href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
+                <li class="{{isActive('contact')}}"><a class="white-text" href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
+            </ul>
+
+            <ul id="slide-out-ubblsa" class="side-nav">
+                <li class="{{isActive('home')}}"><a href="#/samples/ubblsa" data-ng-click="id='home';">Home</a></li>
+                <li class="{{isActive('about')}}"><a href="#/samples/ubblsa/about" data-ng-click="id='about';">About BLSA</a></li>
+                <li class="{{isActive('board')}}"><a href="#/samples/ubblsa/board" data-ng-click="id='board';">Meet the Board</a></li>
+                <li class="{{isActive('events')}}"><a href="#/samples/ubblsa/events" data-ng-click="id='events';">Events</a></li>
+                <li class="{{isActive('contact')}}"><a href="#/samples/ubblsa/contact" data-ng-click="id='contact';">Contact Us</a></li>
+            </ul>
+            <a href="#" data-activates="slide-out-ubblsa" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <div class="container" style="width: 95%; margin-top: 20px;">
+        <div class="row">
+            <div class="col l6 m6 s12">
+                <div class="card-panel blue-grey darken-3 z-depth-5">
+                    <div class="page-header">
+                        <h4 class="white-text">Executive Board</h4>
+                        <h6 class="blue-grey-text text-lighten-4">(Select a member to view more information)</h6>
+                    </div>
+                    <ul class="collection">
+                        <a data-ng-repeat="member in board" data-ng-click="selectMember(member)" class="collection-item avatar clickable {{member.name == selectedMember.name?'active':'blue-grey lighten-4'}}">
+                            <img data-ng-src="{{member.photo}}" alt="" class="circle">
+                            <span class="title">{{member.name}}</span>
+                            <p>{{member.pos}}
+                            </p>
+                            <a data-ng-show="member.linkedin" href="{{member.linkedin}}" class="secondary-content"><img src="images/samples/ubblsa/linkedin.jpg" height="20px"></img></a>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col l6 m6 s12">
+                <div class="card-panel blue-grey darken-3 z-depth-5">
+                    <div class="page-header">
+                        <h4 class="white-text">Member Info</h4>
+                    </div>
+                    <div class="card blue-grey lighten-4">
+                        <div class="card-image">
+                            <img data-ng-src="{{selectedMember.photo}}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{selectedMember.name}}</span>
+                            <span class="card-title">{{selectedMember.pos}}
+                                <a data-ng-show="selectedMember.linkedin" target="_blank" href="{{selectedMember.linkedin}}" class="secondary-content right">
+                                    <img src="images/samples/ubblsa/linkedin.jpg" height="20px"></img></a>
+                            </span>
+                            <h5>{{selectedMember.desc}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <footer class="page-footer blue-grey darken-1">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">UB BLSA</h5>
+                    <p class="grey-text text-lighten-4">Founded in 1978, UB BLSA is a chapter of the National Black Law Students Association (NBLSA), a 501(c)(3) corporation serving the needs and goals of Black Law Students. </p>
+                </div>
+                <div class="col l3 s6">
+                    <h5 class="white-text">Site Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/about">About BLSA</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/board">Meet the Board</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/events">Events</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#/samples/ubblsa/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s6">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" target="_blank" href="https://www.facebook.com/ubblsa/">Facebook</a></li>
+                        <li><a class="grey-text text-lighten-3" href="mailto:ubblsa@gmail.com">E-Mail</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 UB BLSA
+                <a class="grey-text text-lighten-4 right" href="#">Back to Oneiros</a>
+            </div>
+        </div>
+    </footer>
+</div>

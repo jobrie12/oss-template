@@ -23,6 +23,10 @@ p {
   color: #26a69a;
 }
 
+.clickable, .nav, .pagination, .carousel a, .dropdown-menu > li > a {
+  cursor: pointer;
+}
+
 .parallax-container {
   min-height: 380px;
   line-height: 0;
