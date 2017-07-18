@@ -191,11 +191,8 @@ app.controller('AboutCtrl', [
             var bar3 = new ProgressBar.Line('#container3', setup3);
             var bar4 = new ProgressBar.Line('#container4', setup4);
             var bar5 = new ProgressBar.Line('#container5', setup4);
-<<<<<<< HEAD
-=======
             var bar6 = new ProgressBar.Line('#container6', setup6);
             var bar7 = new ProgressBar.Line('#container7', setup7);
->>>>>>> nat-branch
             bar.animate(.75);  // Number from 0.0 to 1.0
 
             bar2.animate(105/300.0);  // Number from 0.0 to 1.0
@@ -205,12 +202,9 @@ app.controller('AboutCtrl', [
             bar4.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
             var dayAgo = Date.create('December 9, 2016').daysAgo();
             bar5.animate(dayAgo/365.0);  // Number from 0.0 to 1.0
-<<<<<<< HEAD
-=======
+
             bar6.animate(3/50);  // Number from 0.0 to 1.0
             bar7.animate(5/30);  // Number from 0.0 to 1.0
-
->>>>>>> nat-branch
         }
 
 
@@ -751,7 +745,6 @@ app.controller('ubblsaCtrl', [
     }]
 );
 
-<<<<<<< HEAD
 app.controller('demo-firmCtrl', [
     '$scope',
     '$state',
@@ -1028,8 +1021,6 @@ app.controller('ubblsaCtrl', [
     }]
 );
 
-=======
->>>>>>> nat-branch
 app.controller('parchitectsCtrl', [
     '$scope',
     '$state',
