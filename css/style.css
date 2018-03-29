@@ -21,6 +21,19 @@ text {
   text-anchor: middle;
 }
 
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 160px;
+    height: 160px;
+    padding: 12px;
+    font: 12px sans-serif;
+    background: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
 body {
   background-color: #607d8b;
 }

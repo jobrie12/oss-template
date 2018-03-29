@@ -1021,8 +1021,8 @@ app.controller('ubblsaCtrl', [
     }]
 );
 
-app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportService',
-    function($scope, $state, $location, LoadReportService){
+app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'LoadReportService',
+    function($scope, $state, $location, $window, LoadReportService){
 
     var accounts = $scope.accounts = {
         data: [],
@@ -1174,7 +1174,6 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
         });*/
         for (var prop in categories.dict){
             if (categories.dict.hasOwnProperty(prop)){
-                console.log(prop);
                 accounts.formattedData.children.push({
                     Name: prop,
                     children: [],
@@ -1184,7 +1183,11 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
             }
         }
 
-        console.log(accounts.formattedData);
+        // Define the div for the tooltip
+        var div = d3.select("body").append("div")
+            .attr("id", "TOOLTIP-CONTENT")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
         var svg = d3.select("svg"),
             diameter = +svg.attr("width"),
@@ -1221,8 +1224,6 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
                     //accounts.formattedData.children.push(account);
                 }
             });
-            console.log(count);
-            console.log(accounts.formattedData);
             var root = accounts.formattedData;
 
             root = d3.hierarchy(root)
@@ -1232,11 +1233,44 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
             var node = g.selectAll(".node")
                 .data(pack(root).descendants())
                 .enter().append("g")
-                .attr("class", function(d) { return d.children ? "node" : "leaf node clickable"; })
-                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+                .attr("class", function(d) { var cls = "node"; if (!d.children){cls +=" leaf"} if (d.data.Name !== 'Influencer Report'){cls += " clickable";} return cls; })
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+                .on("mouseover", function(d) {
+                    if (d.data.Username){
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
+                            "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6>" +
+                            "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
+                            "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    }
+                    else{}
+                })
+                .on("mouseout", function(d) {
+                    if (d.data.Username){
+                        div.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    }
+                    else{}
+                })
+                .on("click", function(d) {
+                    if (d.data.Username){
+                        var url = 'https://twitter.com/'+ d.data.Username;
+                        $window.open(url, '_blank')
+                    }
+                    else{
+                        if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                            $scope.reloadData(d.data.Name)
+                        }
+                    }
+                });
 
-            node.append("title")
-                .text(function(d) { return d.data.Name + "\n" + format(d.value); });
+            /*node.append("title")
+                .text(function(d) { return d.data.Name + "\n" + format(d.value); });*/
 
             node.append("circle")
                 .attr("r", function(d) { return d.r; })
@@ -1256,6 +1290,100 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
                     return fs+'px';
                 });
         })
+    };
+
+    $scope.reloadData = function(name) {
+        accounts.data.forEach(function(account){
+            if (account['Blended Score'] < 0.0){
+                count++;
+            } else {
+                var groupInfo = categories.dict[account.Category];
+                if (!groupInfo){
+                    groupInfo = {group: 9, color: 'black'};
+                }
+                account.color = groupInfo.color;
+                account.group = groupInfo.group;
+
+                var index = categori.indexOf(account.Category);
+                if (account.Category === name){
+                    accounts.formattedData.children[index].children.push(account);
+                }
+
+                //accounts.formattedData.children[groupInfo.group].children.push(account);
+                //accounts.formattedData.children.push(account);
+
+
+                //accounts.formattedData.children[groupInfo.group].children.push(account);
+                //accounts.formattedData.children.push(account);
+            }
+        });
+        var root = accounts.formattedData;
+
+        root = d3.hierarchy(root)
+            .sum(function(d) { return d['Blended Score']; })
+            .sort(function(a, b) { return b.value - a.value; });
+
+        var svg = d3.select('svg').transition();
+
+        var node = g.selectAll(".node")
+            .data(pack(root).descendants())
+            .enter().append("g")
+            .attr("class", function(d) { var cls = "node"; if (!d.children){cls +=" leaf"} if (d.data.Name !== 'Influencer Report'){cls += " clickable";} return cls; })
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .on("mouseover", function(d) {
+                if (d.data.Username){
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
+                        "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6>" +
+                        "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
+                        "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                }
+                else{}
+            })
+            .on("mouseout", function(d) {
+                if (d.data.Username){
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                }
+                else{}
+            })
+            .on("click", function(d) {
+                if (d.data.Username){
+                    var url = 'https://twitter.com/'+ d.data.Username;
+                    $window.open(url, '_blank')
+                }
+                else{
+                    if (d3.element(this).attr("class").indexOf("clickable") != -1){
+
+                    }
+                }
+            });
+
+        /*node.append("title")
+            .text(function(d) { return d.data.Name + "\n" + format(d.value); });*/
+
+        node.append("circle")
+            .attr("r", function(d) { return d.r; })
+            .style("fill", function(d){
+                return d.data.color ? d.data.color : 'white';
+            });
+
+        node.filter(function(d) { return !d.children; }).append("text")
+            .attr("dy", "0.3em")
+            .text(function(d) { var max = (d.r / 2.5) - Math.sqrt(d.r); if (max > 15) max = max / 1.23; return d.data.Name.substring(0, max); })
+            .style('fill', function(d) {
+                var hsl = d3.hsl(d.data.color);
+                return hsl.l > 0.37 ? 'black' : 'white';
+            })
+            .style('font-size', function(d){
+                var fs = (Math.sqrt(d.r) + 8);
+                return fs+'px';
+            });
     };
 
     $scope.selectAccount = function(account){
