@@ -6,6 +6,21 @@
  * Made By MaterializeCSS.com
  */
 
+circle {
+  fill-opacity: .5;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 2px;
+}
+
+.leaf circle {
+  fill-opacity: 1 !important;
+}
+
+text {
+  font-size: 10px;
+  text-anchor: middle;
+}
+
 body {
   background-color: #607d8b;
 }

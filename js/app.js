@@ -1026,12 +1026,29 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
 
     var accounts = $scope.accounts = {
         data: [],
-        selected: null
+        selected: null,
+        formattedData: {
+            Name: "Influencer Report",
+            children: [],
+            color: "white"
+        }
     };
 
     var categories = $scope.categories = {
         groups: ['Arts & Culture', 'Business/Science/Education', 'Consumer Goods', 'Music', 'Entertainment',
-            'Health/Beauty/Fashion/Fitness', 'Home/Family/Lifestyle', 'Political/Social', 'Sports', 'Other'],
+            'Health/Beauty/Fashion/Fitness', 'Home/Family/Lifestyle', 'Political/Social', 'Sports', 'Not Found'],
+        groupColors: {
+            'Arts & Culture': '#F44336',
+            'Business/Science/Education': '#9C27B0',
+            'Consumer Goods': '#2196F3',
+            'Music': '#00796B',
+            'Entertainment': '#4CAF50',
+            'Health/Beauty/Fashion/Fitness': '#FFEB3B',
+            'Home/Family/Lifestyle': '#F4511E',
+            'Political/Social': '#6D4C41',
+            'Sports': '#607D8B',
+            'Not Found': '#000000'
+        },
         dict: {
             'Art': {group: 0, color:"#FFCDD2"},
             'Crafts': {group: 0, color:"#E57373"},
@@ -1039,6 +1056,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
             'Design': {group: 0, color:"#D32F2F"},
             'Reading': {group: 0, color:"#B71C1C"},
             'Business': {group: 1, color:"#CE93D8"},
+            'Computers': {group: 1, color:"#6A1B9A"},
             'Education': {group: 1, color:"#BA68C8"},
             'Finance': {group: 1, color:"#AB47BC"},
             'Higher Education': {group: 1, color:"#9C27B0"},
@@ -1046,16 +1064,16 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
             'Science': {group: 1, color:"#7B1FA2"},
             'Small Business': {group: 1, color:"#6A1B9A"},
             'Automotive': {group: 2, color:"#BBDEFB"},
-            'Beverage': {group: 2, color:"#64B5F6"},
+            'Beverages': {group: 2, color:"#64B5F6"},
             'Consumer Electronics': {group: 2, color:"#2196F3"},
             'Shopping': {group: 2, color:"#1976D2"},
             'Toys And Games': {group: 2, color:"#0D47A1"},
             'Music': {group: 3, color:"#00796B"},
-            'Actors': {group: 4, color:"#E8F5E9"},
+            'Actors': {group: 4, color:"#66BB6A"},
             'Gaming': {group: 4, color:"#C8E6C9"},
             'Humor': {group: 4, color:"#A5D6A7"},
             'Movies': {group: 4, color:"#81C784"},
-            'Multimedia': {group: 4, color:"#66BB6A"},
+            'Multimedia': {group: 4, color:"#E8F5E9"},
             'Podcasts': {group: 4, color:"#4CAF50"},
             'Pop Culture': {group: 4, color:"#43A047"},
             'Smalltalk': {group: 4, color:"#388E3C"},
@@ -1089,72 +1107,156 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportSe
         }
     };
 
-        var categori = ["Art",
-            "Crafts",
-            "Dance",
-            "Design",
-            "Reading",
-            "Business",
-            "Computers",
-            "Education",
-            "Finance",
-            "Higher Education",
-            "Marketing",
-            "Science",
-            "Small Business",
-            "Automotive",
-            "Beverage",
-            "Consumer Electronics",
-            "Shopping",
-            "Toys And Games",
-            "Actors",
-            "Gaming",
-            "Humor",
-            "Movies",
-            "Multimedia",
-            "Podcasts",
-            "Pop Culture",
-            "Smalltalk",
-            "TV",
-            "XXX",
-            "Beauty",
-            "Fashion",
-            "Fitness",
-            "Health Care",
-            "Nutrition",
-            "Outdoor Recreation",
-            "Animals",
-            "Cooking",
-            "Dating",
-            "Events",
-            "Food",
-            "Home And Garden",
-            "Local Life",
-            "Parenting",
-            "Travel",
-            "Music",
-            "Charity",
-            "Current Events",
-            "Environmentalism",
-            "Military",
-            "Politics",
-            "Religion",
-            "Extreme Sports",
-            "Leisure Sports",
-            "Major Sports",
-            "Other Sports"
-        ];
+    var categori = ["Art",
+        "Crafts",
+        "Dance",
+        "Design",
+        "Reading",
+        "Business",
+        "Computers",
+        "Education",
+        "Finance",
+        "Higher Education",
+        "Marketing",
+        "Science",
+        "Small Business",
+        "Automotive",
+        "Beverages",
+        "Consumer Electronics",
+        "Shopping",
+        "Toys And Games",
+        "Music",
+        "Actors",
+        "Gaming",
+        "Humor",
+        "Movies",
+        "Multimedia",
+        "Podcasts",
+        "Pop Culture",
+        "Smalltalk",
+        "TV",
+        "XXX",
+        "Beauty",
+        "Fashion",
+        "Fitness",
+        "Health Care",
+        "Nutrition",
+        "Outdoor Recreation",
+        "Animals",
+        "Cooking",
+        "Dating",
+        "Events",
+        "Food",
+        "Home And Garden",
+        "Local Life",
+        "Parenting",
+        "Travel",
+        "Charity",
+        "Current Events",
+        "Environmentalism",
+        "Military",
+        "Politics",
+        "Religion",
+        "Extreme Sports",
+        "Leisure Sports",
+        "Major Sports",
+        "Other Sports"
+    ];
 
 
-        function init(){
+    function init(){
+        /*categories.groups.forEach(function(group){
+            accounts.formattedData.children.push({
+                Name: group,
+                children: [],
+                color: categories.groupColors[group]
+            })
+        });*/
+        for (var prop in categories.dict){
+            if (categories.dict.hasOwnProperty(prop)){
+                console.log(prop);
+                accounts.formattedData.children.push({
+                    Name: prop,
+                    children: [],
+                    color: categories.dict[prop].color,
+                    group: categories.dict[prop].group
+                })
+            }
+        }
+
+        console.log(accounts.formattedData);
+
+        var svg = d3.select("svg"),
+            diameter = +svg.attr("width"),
+            g = svg.append("g").attr("transform", "translate(2,2)"),
+            format = d3.format(",d");
+
+        var pack = d3.pack()
+            .size([diameter - 4, diameter - 4]);
+
         LoadReportService.fetch().then(function(data) {
             accounts.data = data.data;
-            accounts.data.forEach(function(d){
+            var count = 0;
+            accounts.data.forEach(function(account){
+                if (account['Blended Score'] < 0.0){
+                    count++;
+                } else {
+                    var groupInfo = categories.dict[account.Category];
+                    if (!groupInfo){
+                        groupInfo = {group: 9, color: 'black'};
+                    }
+                    account.color = groupInfo.color;
+                    account.group = groupInfo.group;
 
+                    var index = categori.indexOf(account.Category);
+                    if (index != -1){
+                        accounts.formattedData.children[index].children.push(account);
+                    }
+
+                        //accounts.formattedData.children[groupInfo.group].children.push(account);
+                        //accounts.formattedData.children.push(account);
+
+
+                    //accounts.formattedData.children[groupInfo.group].children.push(account);
+                    //accounts.formattedData.children.push(account);
+                }
             });
-            console.log(accounts);
+            console.log(count);
+            console.log(accounts.formattedData);
+            var root = accounts.formattedData;
+
+            root = d3.hierarchy(root)
+                .sum(function(d) { return d['Blended Score']; })
+                .sort(function(a, b) { return b.value - a.value; });
+
+            var node = g.selectAll(".node")
+                .data(pack(root).descendants())
+                .enter().append("g")
+                .attr("class", function(d) { return d.children ? "node" : "leaf node clickable"; })
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+            node.append("title")
+                .text(function(d) { return d.data.Name + "\n" + format(d.value); });
+
+            node.append("circle")
+                .attr("r", function(d) { return d.r; })
+                .style("fill", function(d){
+                    return d.data.color ? d.data.color : 'white';
+                });
+
+            node.filter(function(d) { return !d.children; }).append("text")
+                .attr("dy", "0.3em")
+                .text(function(d) { var max = (d.r / 2.5) - Math.sqrt(d.r); if (max > 15) max = max / 1.23; return d.data.Name.substring(0, max); })
+                .style('fill', function(d) {
+                    var hsl = d3.hsl(d.data.color);
+                    return hsl.l > 0.37 ? 'black' : 'white';
+                })
+                .style('font-size', function(d){
+                    var fs = (Math.sqrt(d.r) + 8);
+                    return fs+'px';
+                });
         })
-    }
+    };
 
     $scope.selectAccount = function(account){
         accounts.selected = account;
