@@ -882,7 +882,7 @@ app.controller('ubblsaCtrl', [
 
         $scope.selectMember = function(member){
             $scope.selectedMember = member;
-        }
+        };
 
         $scope.events = [{
             image:"images/samples/ubblsa/board-retreat.jpg",
@@ -1020,6 +1020,165 @@ app.controller('ubblsaCtrl', [
         init();
     }]
 );
+
+app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', 'LoadReportService',
+    function($scope, $state, $location, LoadReportService){
+
+    var accounts = $scope.accounts = {
+        data: [],
+        selected: null
+    };
+
+    var categories = $scope.categories = {
+        groups: ['Arts & Culture', 'Business/Science/Education', 'Consumer Goods', 'Music', 'Entertainment',
+            'Health/Beauty/Fashion/Fitness', 'Home/Family/Lifestyle', 'Political/Social', 'Sports', 'Other'],
+        dict: {
+            'Art': {group: 0, color:"#FFCDD2"},
+            'Crafts': {group: 0, color:"#E57373"},
+            'Dance': {group: 0, color:"#F44336"},
+            'Design': {group: 0, color:"#D32F2F"},
+            'Reading': {group: 0, color:"#B71C1C"},
+            'Business': {group: 1, color:"#CE93D8"},
+            'Education': {group: 1, color:"#BA68C8"},
+            'Finance': {group: 1, color:"#AB47BC"},
+            'Higher Education': {group: 1, color:"#9C27B0"},
+            'Marketing': {group: 1, color:"#8E24AA"},
+            'Science': {group: 1, color:"#7B1FA2"},
+            'Small Business': {group: 1, color:"#6A1B9A"},
+            'Automotive': {group: 2, color:"#BBDEFB"},
+            'Beverage': {group: 2, color:"#64B5F6"},
+            'Consumer Electronics': {group: 2, color:"#2196F3"},
+            'Shopping': {group: 2, color:"#1976D2"},
+            'Toys And Games': {group: 2, color:"#0D47A1"},
+            'Music': {group: 3, color:"#00796B"},
+            'Actors': {group: 4, color:"#E8F5E9"},
+            'Gaming': {group: 4, color:"#C8E6C9"},
+            'Humor': {group: 4, color:"#A5D6A7"},
+            'Movies': {group: 4, color:"#81C784"},
+            'Multimedia': {group: 4, color:"#66BB6A"},
+            'Podcasts': {group: 4, color:"#4CAF50"},
+            'Pop Culture': {group: 4, color:"#43A047"},
+            'Smalltalk': {group: 4, color:"#388E3C"},
+            'TV': {group: 4, color:"#2E7D32"},
+            'XXX': {group: 4, color:"#1B5E20"},
+            'Beauty': {group: 5, color: "#FFFF00"},
+            'Fashion': {group: 5, color: "#FFF176"},
+            'Fitness': {group: 5, color: "#FFEE58"},
+            'Health Care': {group: 5, color: "#FFEB3B"},
+            'Nutrition': {group: 5, color: "#FDD835"},
+            'Outdoor Recreation': {group: 5, color: "#FBC02D"},
+            'Animals': {group: 6, color: "#FFCCBC"},
+            'Cooking': {group: 6, color: "#FFAB91"},
+            'Dating': {group: 6, color: "#FF8A65"},
+            'Events': {group: 6, color: "#FF7043"},
+            'Food': {group: 6, color: "#FF5722"},
+            'Home And Garden': {group: 6, color: "#F4511E"},
+            'Local Life': {group: 6, color: "#E64A19"},
+            'Parenting': {group: 6, color: "#D84315"},
+            'Travel': {group: 6, color: "#BF360C"},
+            'Charity': {group: 7, color: "#A1887F"},
+            'Current Events': {group: 7, color: "#8D6E63"},
+            'Environmentalism': {group: 7, color: "#795548"},
+            'Military': {group: 7, color: "#6D4C41"},
+            'Politics': {group: 7, color: "#5D4037"},
+            'Religion': {group: 7, color: "#4E342E"},
+            'Extreme Sports': {group: 8, color: "#CFD8DC"},
+            'Leisure Sports': {group: 8, color: "#90A4AE"},
+            'Major Sports': {group: 8, color: "#607D8B"},
+            'Other Sports': {group: 8, color: "#455A64"}
+        }
+    };
+
+        var categori = ["Art",
+            "Crafts",
+            "Dance",
+            "Design",
+            "Reading",
+            "Business",
+            "Computers",
+            "Education",
+            "Finance",
+            "Higher Education",
+            "Marketing",
+            "Science",
+            "Small Business",
+            "Automotive",
+            "Beverage",
+            "Consumer Electronics",
+            "Shopping",
+            "Toys And Games",
+            "Actors",
+            "Gaming",
+            "Humor",
+            "Movies",
+            "Multimedia",
+            "Podcasts",
+            "Pop Culture",
+            "Smalltalk",
+            "TV",
+            "XXX",
+            "Beauty",
+            "Fashion",
+            "Fitness",
+            "Health Care",
+            "Nutrition",
+            "Outdoor Recreation",
+            "Animals",
+            "Cooking",
+            "Dating",
+            "Events",
+            "Food",
+            "Home And Garden",
+            "Local Life",
+            "Parenting",
+            "Travel",
+            "Music",
+            "Charity",
+            "Current Events",
+            "Environmentalism",
+            "Military",
+            "Politics",
+            "Religion",
+            "Extreme Sports",
+            "Leisure Sports",
+            "Major Sports",
+            "Other Sports"
+        ];
+
+
+        function init(){
+        LoadReportService.fetch().then(function(data) {
+            accounts.data = data.data;
+            accounts.data.forEach(function(d){
+
+            });
+            console.log(accounts);
+        })
+    }
+
+    $scope.selectAccount = function(account){
+        accounts.selected = account;
+    };
+
+    init();
+}]);
+
+app.factory('LoadReportService', function($q,$timeout,$http) {
+    var players = {
+        fetch: function(callback) {
+            var deferred = $q.defer();
+            $timeout(function() {
+                $http.get("/oss-template/data/john-doe-ir.json").then(function(data) {
+                    deferred.resolve(data);
+                });
+            }, 30);
+
+            return deferred.promise;
+        }
+    };
+
+    return players;
+});
 
 app.controller('parchitectsCtrl', [
     '$scope',

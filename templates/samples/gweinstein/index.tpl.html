@@ -1,0 +1,44 @@
+<div class="container" id="" style="margin: 2.5%; max-width: none; min-width: 95%;">
+    <div class="row">
+        <div class="col s8 m6" style="max-height: 400px; overflow-y: auto">
+            <table class="highlight centered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Category</th>
+                    <th>Blended Score</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr data-ng-repeat="account in accounts.data" class="clickable" data-ng-click="selectAccount(account)" style="{{account == accounts.selected?'background-color: cyan;':''}}">
+                    <td>{{account['Name']}}</td>
+                    <td>{{account['Username']}}</td>
+                    <td>{{account['Category']}}</td>
+                    <td>{{account['Blended Score'] * 100 | number: 2}}%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col s4 m6">
+            <div class="card-panel grey lighten-5 z-depth-1" style="width: 100%;">
+                <div class="row" data-ng-show="accounts.selected['Username']">
+                    <div class="col s2">
+                        <img ng-src="https://twitter.com/{{accounts.selected['Username']}}/profile_image?size=bigger" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                    </div>
+                    <div class="col s10">
+                        <h5>{{accounts.selected['Name']}} &nbsp;  <label style="font-size: 1.2rem;">{{accounts.selected['Category']}}</label></h5>
+                        <h6><i class="fab fa-twitter cyan-text"></i><a href="https://twitter.com/{{accounts.selected['Username']}}">
+                            @{{accounts.selected['Username']}}</a> &nbsp; | &nbsp;
+                            <i class="fas fa-users"></i> {{accounts.selected['Followers'] | number}} Followers
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <svg text-anchor="middle"></svg>
+    </div>
+</div>
