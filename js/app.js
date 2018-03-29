@@ -1241,13 +1241,23 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                             .duration(200)
                             .style("opacity", .9);
                         div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
-                            "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6>" +
+                            "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6><h6>"+d.data.Category+"</h6>" +
                             "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
                             "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
                             .style("left", (d3.event.pageX) + "px")
                             .style("top", (d3.event.pageY - 28) + "px");
                     }
-                    else{}
+                    else{
+                        if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                            div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                            div.html("<h6><b>" + d.data.Name + "</b></h6><h6>"+categories.groups[d.data.group]+"</h6>"
+                                )
+                                .style("left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 28) + "px");
+                        }
+                    }
                 })
                 .on("mouseout", function(d) {
                     if (d.data.Username){
@@ -1255,7 +1265,6 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                             .duration(500)
                             .style("opacity", 0);
                     }
-                    else{}
                 })
                 .on("click", function(d) {
                     if (d.data.Username){
@@ -1342,15 +1351,23 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 }
-                else{}
+                else{
+                    if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.html("<h6><b>" + d.data.Name + "</b></h6>" +
+                            "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
+                            "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    }
+                }
             })
             .on("mouseout", function(d) {
-                if (d.data.Username){
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                }
-                else{}
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             })
             .on("click", function(d) {
                 if (d.data.Username){
