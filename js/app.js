@@ -1438,7 +1438,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
     var removeChart = function(){
         d3.select("svg").selectAll('*').remove();
-        d3.select('#TOOLTIP-CONTENT').remove();
+        d3.select('div#TOOLTIP-CONTENT').remove(function (d){$scope.$apply();});
     };
 
     $scope.viewCategory = function(name){
