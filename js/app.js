@@ -1031,8 +1031,10 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             Name: "Influencer Report",
             children: [],
             color: "white"
-        }
+        },
+        count: 0
     };
+
 
     var select = $scope.select = {
         filterChoices: ['None', 'Categories', 'Groups', 'Threshold'],
@@ -1172,7 +1174,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
         }
     };
 
-    var categori = ["Art",
+    var categori = $scope.categori = ["Art",
         "Crafts",
         "Dance",
         "Design",
@@ -1229,6 +1231,11 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
     ];
 
 
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+
+
     function init(){
         /*categories.groups.forEach(function(group){
             accounts.formattedData.children.push({
@@ -1237,6 +1244,17 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 color: categories.groupColors[group]
             })
         });*/
+
+        d3.select("div#circleChart")
+            .append("div")
+            .classed("svg-container", true) //container class to make it responsive
+            .append("svg")
+            //responsive SVG needs these 2 attributes and no width and height attr
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "0 0 1200 1200")
+            //class to make it responsive
+            .classed("svg-content-responsive", true);
+
         for (var prop in categories.dict){
             if (categories.dict.hasOwnProperty(prop)){
                 accounts.formattedData.children.push({
@@ -1250,29 +1268,18 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
         LoadReportService.fetch().then(function(data) {
             accounts.data = data.data;
-            var count = 0;
             accounts.data.forEach(function(account){
-                if (account['Blended Score'] < 0.0){
-                    count++;
-                } else {
-                    var groupInfo = categories.dict[account.Category];
-                    if (!groupInfo){
-                        groupInfo = {group: 9, color: 'black'};
-                    }
-                    account.color = groupInfo.color;
-                    account.group = groupInfo.group;
+                var groupInfo = categories.dict[account.Category];
+                if (!groupInfo){
+                    groupInfo = {group: 9, color: 'black'};
+                }
+                account.color = groupInfo.color;
+                account.group = groupInfo.group;
 
-                    var index = categori.indexOf(account.Category);
-                    if (index != -1){
-                        accounts.formattedData.children[index].children.push(account);
-                    }
-
-                    //accounts.formattedData.children[groupInfo.group].children.push(account);
-                    //accounts.formattedData.children.push(account);
-
-
-                    //accounts.formattedData.children[groupInfo.group].children.push(account);
-                    //accounts.formattedData.children.push(account);
+                var index = categori.indexOf(account.Category);
+                if (index != -1){
+                    accounts.formattedData.children[index].children.push(account);
+                    accounts.count++;
                 }
             });
 
@@ -1288,7 +1295,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             .style("opacity", 0);
 
         var svg = d3.select("svg"),
-            diameter = +svg.attr("width"),
+            diameter = 1200,
             g = svg.append("g").attr("transform", "translate(2,2)"),
             format = d3.format(",d");
 
@@ -1429,7 +1436,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             .style('opacity',0.85);
     };
 
-    $scope.removeChart = function(){
+    var removeChart = function(){
         d3.select("svg").selectAll('*').remove();
         d3.select('#TOOLTIP-CONTENT').remove();
     };
@@ -1440,15 +1447,19 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
         $scope.updateData();
     };
 
-    $scope.updateData = function(){
-        console.log(select);
-        $scope.removeChart();
+    $scope.updateData = function(forceType, clean){
+        removeChart();
         accounts.formattedData = {
             Name: "Influencer Report",
             children: [],
             color: "white"
         };
-        if (!select.loose){
+        accounts.count = 0;
+        if (clean){
+            select.loose = false;
+            select.filterBy = select.filterChoices[0];
+            select.selectedCategories = [];
+            select.selectedGroups = [];
             for (var prop in categories.dict){
                 if (categories.dict.hasOwnProperty(prop)){
                     accounts.formattedData.children.push({
@@ -1459,11 +1470,34 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                     })
                 }
             }
-        }
-        accounts.data.forEach(function(account){
-            if (account['Blended Score'] < 0.0){
-                count++;
-            } else {
+            accounts.data.forEach(function(account){
+                var groupInfo = categories.dict[account.Category];
+                if (!groupInfo){
+                    groupInfo = {group: 9, color: 'black'};
+                }
+                account.color = groupInfo.color;
+                account.group = groupInfo.group;
+
+                var index = categori.indexOf(account.Category);
+                if (index != -1){
+                    accounts.formattedData.children[index].children.push(account);
+                    accounts.count++;
+                }
+            });
+        } else {
+            if (!select.loose){
+                for (var prop in categories.dict){
+                    if (categories.dict.hasOwnProperty(prop)){
+                        accounts.formattedData.children.push({
+                            Name: prop,
+                            children: [],
+                            color: categories.dict[prop].color,
+                            group: categories.dict[prop].group
+                        })
+                    }
+                }
+            }
+            accounts.data.forEach(function(account){
                 var groupInfo = categories.dict[account.Category];
                 if (!groupInfo){
                     groupInfo = {group: 9, color: 'black'};
@@ -1473,7 +1507,12 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
                 var index = categori.indexOf(account.Category);
                 if (select.filterBy == 'None' && index != -1){
-                    accounts.formattedData.children[index].children.push(account);
+                    if (select.loose){
+                        accounts.formattedData.children.push(account);
+                    } else {
+                        accounts.formattedData.children[index].children.push(account);
+                    }
+                    accounts.count += 1;
                 } else if (select.filterBy == 'Categories' && index != -1){
                     if (select.selectedCategories.indexOf(account.Category) !== -1){
                         if (select.loose){
@@ -1481,6 +1520,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.count += 1;
                     }
                 } else if (select.filterBy == 'Groups' && index != -1){
                     if (select.selectedGroups.indexOf(categories.groups[account.group]) !== -1){
@@ -1489,6 +1529,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.count += 1;
                     }
                 } else if (select.filterBy == 'Threshold' && index != -1){
                     if (account['Blended Score'] >= select.threshold){
@@ -1497,22 +1538,21 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.count += 1;
                     }
                 }
+            });
+        }
 
-                //accounts.formattedData.children[groupInfo.group].children.push(account);
-                //accounts.formattedData.children.push(account);
-
-
-                //accounts.formattedData.children[groupInfo.group].children.push(account);
-                //accounts.formattedData.children.push(account);
-            }
-        });
         buildChart();
     };
 
     $scope.selectAccount = function(account){
         accounts.selected = account;
+    };
+
+    $scope.resetData = function(){
+        $scope.updateData(false, true);
     };
 
     init();

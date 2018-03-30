@@ -25,6 +25,25 @@ text {
     border-bottom: 1px solid #000000 !important;
 }
 
+input[type=number]{
+    border-bottom: 1px solid #000000 !important;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+
 div.tooltip {
     position: absolute;
     text-align: center;

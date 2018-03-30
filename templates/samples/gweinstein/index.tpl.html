@@ -4,45 +4,53 @@
             <div class="card blue-grey lighten-2">
                 <div class="card-content">
                     <h4 style="margin-top: 0;" class="cyan-text text-accent-3">Control Panel</h4>
-                    <div class="row">
-                        <div class="col s10">
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s9">
                             <div class="row">
-                                <div input-field class="col s6">
-                                    <label class="white-text">Choose Filter Method</label><br>
+                                <div input-field class="col s4">
+                                    <label class="white-text" style="margin-top: -30px;">Choose Filter Method</label><br>
                                     <select id="filterBy" class="" ng-model="select.filterBy" material-select watch>
                                         <option ng-repeat="value in select.filterChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Categories'">
-                                    <label class="white-text">Select Categories to View</label><br>
+                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Categories'">
+                                    <label class="white-text" style="margin-top: -30px;">Select Categories to View</label><br>
                                     <select class="" ng-model="select.selectedCategories" material-select multiple watch data-ng-change="updateData()">
                                         <option ng-repeat="value in select.categoryChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Groups'">
-                                    <label class="white-text">Select Groups to View</label><br>
+                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Groups'">
+                                    <label class="white-text" style="margin-top: -30px;">Select Groups to View</label><br>
                                     <select class="" ng-model="select.selectedGroups" material-select multiple watch data-ng-change="updateData()">
                                         <option ng-repeat="value in select.groupChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Threshold'">
-                                    <label class="white-text">Input Minimum Threshold to Pass</label><br>
+                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Threshold'">
+                                    <label class="white-text" style="font-size: 1rem;">Input Minimum Threshold to Pass</label><br>
                                     <input type="number" ng-model="select.threshold" data-ng-change="updateData()"
                                            min="0.01" max="0.99" step="0.01">
-                                    <label>Input label</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s2">
+                        <div class="col s3 right-align">
                             <br>
                             <br>
                             <div class="switch">
                                 <label class="white-text">
                                     Pack
-                                    <input type="checkbox" data-ng-model="select.loose" data-ng-change="updateData()">
+                                    <input type="checkbox" data-ng-model="select.loose" data-ng-change="updateData(true)">
                                     <span class="lever"></span>
                                     Loose
                                 </label>
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12 center-align">
+                                    <a class="waves-effect waves-light btn" data-ng-click="resetData()">Reset Chart</a>
+                                    <h5 data-ng-show="accounts.count" class="white-text">{{accounts.count}} accounts included in this chart.</h5>
+                                    <h5 data-ng-hide="accounts.count" class="red-text">There are no accounts with this configuration. Change your filter or <a class="clickable" data-ng-click="resetData()">click to reset</a>.</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,6 +95,28 @@
             </div>
         </div>-->
     </div>
-    <div>
-        <svg width="1000" height="1000"><g transform="translate(1,1)"></g></svg>    </div>
+    <div class="row">
+        <div class="col s2">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">map</i>Group Legend (Click)</div>
+                    <div class="collapsible-body white" style="overflow-x: auto; overflow-y: hidden; padding: 0px 0px 2px 5px;">
+                        <h6><b>Groups</b></h6>
+                        <p style="margin-top: 0; margin-bottom: 0; line-height: 1.1rem;" data-ng-repeat="group in categories.groups"><i class="material-icons" style="color: {{categories.groupColors[group]}}; top: 6px; line-height: 0.5; position: relative;">label</i>{{group}}</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">map</i>Category Legend</div>
+                    <div class="collapsible-body white" style="overflow-x: auto; overflow-y: hidden; padding: 0px 0px 2px 5px;">
+                        <h6><b>Categories</b></h6>
+                        <p style="margin-top: 0; margin-bottom: 0; line-height: 1.1rem;" data-ng-repeat="cat in categori"><i class="material-icons" style="color: {{categories.dict[cat].color}}; top: 6px; line-height: 0.5; position: relative;">label</i>{{cat}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="circleChart" class="col s10">
+            <!--<svg width="1000" height="1000"><g transform="translate(1,1)"></g></svg>-->
+        </div>
+    </div>
+
 </div>
