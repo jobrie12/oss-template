@@ -1092,7 +1092,9 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             "Leisure Sports",
             "Major Sports",
             "Other Sports"
-        ]
+        ],
+        loose: false,
+        threshold: 0.01
     };
 
     select.filterBy = select.filterChoices[0];
@@ -1441,6 +1443,23 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
     $scope.updateData = function(){
         console.log(select);
         $scope.removeChart();
+        accounts.formattedData = {
+            Name: "Influencer Report",
+            children: [],
+            color: "white"
+        };
+        if (!select.loose){
+            for (var prop in categories.dict){
+                if (categories.dict.hasOwnProperty(prop)){
+                    accounts.formattedData.children.push({
+                        Name: prop,
+                        children: [],
+                        color: categories.dict[prop].color,
+                        group: categories.dict[prop].group
+                    })
+                }
+            }
+        }
         accounts.data.forEach(function(account){
             if (account['Blended Score'] < 0.0){
                 count++;
@@ -1455,12 +1474,30 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 var index = categori.indexOf(account.Category);
                 if (select.filterBy == 'None' && index != -1){
                     accounts.formattedData.children[index].children.push(account);
-                } else if (select.filterBy == 'Categories'){
-
-                } else if (select.filterBy == 'Groups'){
-
-                } else if (select.filterBy == 'Threshold'){
-                    
+                } else if (select.filterBy == 'Categories' && index != -1){
+                    if (select.selectedCategories.indexOf(account.Category) !== -1){
+                        if (select.loose){
+                            accounts.formattedData.children.push(account);
+                        } else {
+                            accounts.formattedData.children[index].children.push(account);
+                        }
+                    }
+                } else if (select.filterBy == 'Groups' && index != -1){
+                    if (select.selectedGroups.indexOf(categories.groups[account.group]) !== -1){
+                        if (select.loose){
+                            accounts.formattedData.children.push(account);
+                        } else {
+                            accounts.formattedData.children[index].children.push(account);
+                        }
+                    }
+                } else if (select.filterBy == 'Threshold' && index != -1){
+                    if (account['Blended Score'] >= select.threshold){
+                        if (select.loose){
+                            accounts.formattedData.children.push(account);
+                        } else {
+                            accounts.formattedData.children[index].children.push(account);
+                        }
+                    }
                 }
 
                 //accounts.formattedData.children[groupInfo.group].children.push(account);

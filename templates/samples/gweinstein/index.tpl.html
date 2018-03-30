@@ -25,6 +25,24 @@
                                         <option ng-repeat="value in select.groupChoices">{{value}}</option>
                                     </select>
                                 </div>
+                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Threshold'">
+                                    <label class="white-text">Input Minimum Threshold to Pass</label><br>
+                                    <input type="number" ng-model="select.threshold" data-ng-change="updateData()"
+                                           min="0.01" max="0.99" step="0.01">
+                                    <label>Input label</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s2">
+                            <br>
+                            <br>
+                            <div class="switch">
+                                <label class="white-text">
+                                    Pack
+                                    <input type="checkbox" data-ng-model="select.loose" data-ng-change="updateData()">
+                                    <span class="lever"></span>
+                                    Loose
+                                </label>
                             </div>
                         </div>
                     </div>
