@@ -21,16 +21,20 @@ text {
   text-anchor: middle;
 }
 
+.select-wrapper>input.select-dropdown{
+    border-bottom: 1px solid #000000 !important;
+}
+
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 160px;
-    height: 186px;
+    width: 200px;
+    height: 200px;
     padding: 12px;
     font: 12px sans-serif;
     background: white;
     border: 0px;
-    border-radius: 8px;
+    border-radius: 100%;
     pointer-events: none;
 }
 

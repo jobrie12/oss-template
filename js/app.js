@@ -1,7 +1,7 @@
 /**
  * Created by james on 6/24/2017.
  */
-var app = angular.module('oneiros', ['ui.router', 'vcRecaptcha']);
+var app = angular.module('oneiros', ['ui.router', 'vcRecaptcha', 'ui.materialize']);
 
 app.config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
@@ -1034,6 +1034,69 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
         }
     };
 
+    var select = $scope.select = {
+        filterChoices: ['None', 'Categories', 'Groups', 'Threshold'],
+        groupChoices: ['Arts & Culture', 'Business/Science/Education', 'Consumer Goods', 'Music', 'Entertainment',
+        'Health/Beauty/Fashion/Fitness', 'Home/Family/Lifestyle', 'Political/Social', 'Sports', 'Not Found'],
+        categoryChoices: ["Art",
+            "Crafts",
+            "Dance",
+            "Design",
+            "Reading",
+            "Business",
+            "Computers",
+            "Education",
+            "Finance",
+            "Higher Education",
+            "Marketing",
+            "Science",
+            "Small Business",
+            "Automotive",
+            "Beverages",
+            "Consumer Electronics",
+            "Shopping",
+            "Toys And Games",
+            "Music",
+            "Actors",
+            "Gaming",
+            "Humor",
+            "Movies",
+            "Multimedia",
+            "Podcasts",
+            "Pop Culture",
+            "Smalltalk",
+            "TV",
+            "XXX",
+            "Beauty",
+            "Fashion",
+            "Fitness",
+            "Health Care",
+            "Nutrition",
+            "Outdoor Recreation",
+            "Animals",
+            "Cooking",
+            "Dating",
+            "Events",
+            "Food",
+            "Home And Garden",
+            "Local Life",
+            "Parenting",
+            "Travel",
+            "Charity",
+            "Current Events",
+            "Environmentalism",
+            "Military",
+            "Politics",
+            "Religion",
+            "Extreme Sports",
+            "Leisure Sports",
+            "Major Sports",
+            "Other Sports"
+        ]
+    };
+
+    select.filterBy = select.filterChoices[0];
+
     var categories = $scope.categories = {
         groups: ['Arts & Culture', 'Business/Science/Education', 'Consumer Goods', 'Music', 'Entertainment',
             'Health/Beauty/Fashion/Fitness', 'Home/Family/Lifestyle', 'Political/Social', 'Sports', 'Not Found'],
@@ -1183,20 +1246,6 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             }
         }
 
-        // Define the div for the tooltip
-        var div = d3.select("body").append("div")
-            .attr("id", "TOOLTIP-CONTENT")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        var svg = d3.select("svg"),
-            diameter = +svg.attr("width"),
-            g = svg.append("g").attr("transform", "translate(2,2)"),
-            format = d3.format(",d");
-
-        var pack = d3.pack()
-            .size([diameter - 4, diameter - 4]);
-
         LoadReportService.fetch().then(function(data) {
             accounts.data = data.data;
             var count = 0;
@@ -1216,123 +1265,39 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         accounts.formattedData.children[index].children.push(account);
                     }
 
-                        //accounts.formattedData.children[groupInfo.group].children.push(account);
-                        //accounts.formattedData.children.push(account);
+                    //accounts.formattedData.children[groupInfo.group].children.push(account);
+                    //accounts.formattedData.children.push(account);
 
 
                     //accounts.formattedData.children[groupInfo.group].children.push(account);
                     //accounts.formattedData.children.push(account);
                 }
             });
-            var root = accounts.formattedData;
 
-            root = d3.hierarchy(root)
-                .sum(function(d) { return d['Blended Score']; })
-                .sort(function(a, b) { return b.value - a.value; });
-
-            var node = g.selectAll(".node")
-                .data(pack(root).descendants())
-                .enter().append("g")
-                .attr("class", function(d) { var cls = "node"; if (!d.children){cls +=" leaf"} if (d.data.Name !== 'Influencer Report'){cls += " clickable";} return cls; })
-                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-                .on("mouseover", function(d) {
-                    if (d.data.Username){
-                        div.transition()
-                            .duration(200)
-                            .style("opacity", .9);
-                        div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
-                            "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6><h6>"+d.data.Category+"</h6>" +
-                            "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
-                            "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
-                            .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
-                    }
-                    else{
-                        if (d3.select(this).attr("class").indexOf("clickable") != -1){
-                            div.transition()
-                                .duration(200)
-                                .style("opacity", .9);
-                            div.html("<h6><b>" + d.data.Name + "</b></h6><h6>"+categories.groups[d.data.group]+"</h6>"
-                                )
-                                .style("left", (d3.event.pageX) + "px")
-                                .style("top", (d3.event.pageY - 28) + "px");
-                        }
-                    }
-                })
-                .on("mouseout", function(d) {
-                    if (d.data.Username){
-                        div.transition()
-                            .duration(500)
-                            .style("opacity", 0);
-                    }
-                })
-                .on("click", function(d) {
-                    if (d.data.Username){
-                        var url = 'https://twitter.com/'+ d.data.Username;
-                        $window.open(url, '_blank')
-                    }
-                    else{
-                        if (d3.select(this).attr("class").indexOf("clickable") != -1){
-                            $scope.reloadData(d.data.Name)
-                        }
-                    }
-                });
-
-            /*node.append("title")
-                .text(function(d) { return d.data.Name + "\n" + format(d.value); });*/
-
-            node.append("circle")
-                .attr("r", function(d) { return d.r; })
-                .style("fill", function(d){
-                    return d.data.color ? d.data.color : 'white';
-                });
-
-            node.filter(function(d) { return !d.children; }).append("text")
-                .attr("dy", "0.3em")
-                .text(function(d) { var max = (d.r / 2.5) - Math.sqrt(d.r); if (max > 15) max = max / 1.23; return d.data.Name.substring(0, max); })
-                .style('fill', function(d) {
-                    var hsl = d3.hsl(d.data.color);
-                    return hsl.l > 0.37 ? 'black' : 'white';
-                })
-                .style('font-size', function(d){
-                    var fs = (Math.sqrt(d.r) + 8);
-                    return fs+'px';
-                });
+            buildChart();
         })
     };
 
-    $scope.reloadData = function(name) {
-        accounts.data.forEach(function(account){
-            if (account['Blended Score'] < 0.0){
-                count++;
-            } else {
-                var groupInfo = categories.dict[account.Category];
-                if (!groupInfo){
-                    groupInfo = {group: 9, color: 'black'};
-                }
-                account.color = groupInfo.color;
-                account.group = groupInfo.group;
+    var buildChart = function(){
+        // Define the div for the tooltip
+        var div = d3.select("body").append("div")
+            .attr("id", "TOOLTIP-CONTENT")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
-                var index = categori.indexOf(account.Category);
-                if (account.Category === name){
-                    accounts.formattedData.children[index].children.push(account);
-                }
+        var svg = d3.select("svg"),
+            diameter = +svg.attr("width"),
+            g = svg.append("g").attr("transform", "translate(2,2)"),
+            format = d3.format(",d");
 
-                //accounts.formattedData.children[groupInfo.group].children.push(account);
-                //accounts.formattedData.children.push(account);
+        var pack = d3.pack()
+            .size([diameter - 4, diameter - 4]);
 
-
-                //accounts.formattedData.children[groupInfo.group].children.push(account);
-                //accounts.formattedData.children.push(account);
-            }
-        });
         var root = accounts.formattedData;
 
         root = d3.hierarchy(root)
             .sum(function(d) { return d['Blended Score']; })
             .sort(function(a, b) { return b.value - a.value; });
-
-        var svg = d3.select('svg').transition();
 
         var node = g.selectAll(".node")
             .data(pack(root).descendants())
@@ -1340,12 +1305,17 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             .attr("class", function(d) { var cls = "node"; if (!d.children){cls +=" leaf"} if (d.data.Name !== 'Influencer Report'){cls += " clickable";} return cls; })
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .on("mouseover", function(d) {
+                svg.selectAll(".overlabels").transition()
+                    .duration(200)
+                    .style("opacity", 0).transition()
+                    .duration(200)
+                    .style("display", 'none');;
                 if (d.data.Username){
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
                     div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
-                        "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6>" +
+                        "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6><h6>"+d.data.Category+"</h6>" +
                         "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
                         "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
                         .style("left", (d3.event.pageX) + "px")
@@ -1353,21 +1323,36 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 }
                 else{
                     if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                        var group = categories.groups[d.data.group];
+                        group = group.replace(/\//g,'<br>');
                         div.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div.html("<h6><b>" + d.data.Name + "</b></h6>" +
-                            "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
-                            "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
+                        div.html("<br><br><br><h6><b>" + d.data.Name + "</b></h6><h6>"+group+"</h6><h6>"+ d.children.length +" Accounts </h6>"
+                        )
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
+                            .style("top", (d3.event.pageY - 28) + "px")
+                            .style('text-align', 'center');
                     }
                 }
             })
             .on("mouseout", function(d) {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
+                if (d.data.Username){
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                } else {
+                    if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", 0);
+                    } else {
+                        svg.selectAll(".overlabels").transition()
+                            .duration(200)
+                            .style("opacity", 0.85)
+                            .style("display", "inline");
+                    }
+                }
             })
             .on("click", function(d) {
                 if (d.data.Username){
@@ -1375,8 +1360,9 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                     $window.open(url, '_blank')
                 }
                 else{
-                    if (d3.element(this).attr("class").indexOf("clickable") != -1){
-
+                    if (d3.select(this).attr("class").indexOf("clickable") != -1){
+                        $scope.viewCategory(d.data.Name);
+                        $scope.$apply();
                     }
                 }
             });
@@ -1401,6 +1387,91 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 var fs = (Math.sqrt(d.r) + 8);
                 return fs+'px';
             });
+
+        var nodetwo = g.selectAll(".nodetwo")
+            .data(pack(root).descendants())
+            .enter().append("g")
+            .attr("class", function(d) { var cls = "nodetwo"; if (!d.children){cls +=" leaf"} if (d.data.Name !== 'Influencer Report'){cls += " clickable";} return cls; })
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+        /*nodetwo.append("title")
+            .text(function(d) { return d.data.Name + "\n" + format(d.value); });*/
+
+        nodetwo.append("circle")
+            .attr("r", function(d) { return d.r; })
+            .style("fill", 'none')
+            .style('stroke', 'none');
+
+        nodetwo.filter(function(d) { return !d.children; }).append("text")
+            .attr("dy", "0.3em")
+            .text('')
+            .style('fill', 'none')
+            .style('stroke', 'none');
+
+        nodetwo.filter(function(d){return d.children && d.data.Name !== "Influencer Report";})
+            .append("span")
+            .attr('width','100px')
+            .attr('height', '50px')
+            .style('background-color', 'black');
+
+        nodetwo.filter(function(d){return d.children && d.data.Name !== "Influencer Report";})
+            .append("text")
+            .attr('class', 'overlabels')
+            .attr('dy','0.3em')
+            .text(function(d) {return d.data.Name;})
+            .style('fill', function(d){return d.data.color})
+            .style('font-size', function(d){return (1 + (Math.sqrt(d.r)*4.5)) +'px'})
+            .style('font-weight', 'bold')
+            .style('stroke', 'black')
+            .style('stroke-width', function(d){return (1 + (Math.sqrt(d.r)*4.5)) < 20 ? '1px' : '2px';})
+            .style('opacity',0.85);
+    };
+
+    $scope.removeChart = function(){
+        d3.select("svg").selectAll('*').remove();
+        d3.select('#TOOLTIP-CONTENT').remove();
+    };
+
+    $scope.viewCategory = function(name){
+        select.filterBy = 'Categories';
+        select.selectedCategories = [name];
+        $scope.updateData();
+    };
+
+    $scope.updateData = function(){
+        console.log(select);
+        $scope.removeChart();
+        accounts.data.forEach(function(account){
+            if (account['Blended Score'] < 0.0){
+                count++;
+            } else {
+                var groupInfo = categories.dict[account.Category];
+                if (!groupInfo){
+                    groupInfo = {group: 9, color: 'black'};
+                }
+                account.color = groupInfo.color;
+                account.group = groupInfo.group;
+
+                var index = categori.indexOf(account.Category);
+                if (select.filterBy == 'None' && index != -1){
+                    accounts.formattedData.children[index].children.push(account);
+                } else if (select.filterBy == 'Categories'){
+
+                } else if (select.filterBy == 'Groups'){
+
+                } else if (select.filterBy == 'Threshold'){
+                    
+                }
+
+                //accounts.formattedData.children[groupInfo.group].children.push(account);
+                //accounts.formattedData.children.push(account);
+
+
+                //accounts.formattedData.children[groupInfo.group].children.push(account);
+                //accounts.formattedData.children.push(account);
+            }
+        });
+        buildChart();
     };
 
     $scope.selectAccount = function(account){

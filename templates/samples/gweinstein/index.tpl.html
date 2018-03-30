@@ -1,6 +1,37 @@
 <div class="container" id="" style="margin: 2.5%; max-width: none; min-width: 95%;">
     <div class="row">
-        <div class="col s8 m6" style="max-height: 400px; overflow-y: auto">
+        <div class="col s12">
+            <div class="card blue-grey lighten-2">
+                <div class="card-content">
+                    <h4 style="margin-top: 0;" class="cyan-text text-accent-3">Control Panel</h4>
+                    <div class="row">
+                        <div class="col s10">
+                            <div class="row">
+                                <div input-field class="col s6">
+                                    <label class="white-text">Choose Filter Method</label><br>
+                                    <select id="filterBy" class="" ng-model="select.filterBy" material-select watch>
+                                        <option ng-repeat="value in select.filterChoices">{{value}}</option>
+                                    </select>
+                                </div>
+                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Categories'">
+                                    <label class="white-text">Select Categories to View</label><br>
+                                    <select class="" ng-model="select.selectedCategories" material-select multiple watch data-ng-change="updateData()">
+                                        <option ng-repeat="value in select.categoryChoices">{{value}}</option>
+                                    </select>
+                                </div>
+                                <div input-field class="col s6" data-ng-show="select.filterBy === 'Groups'">
+                                    <label class="white-text">Select Groups to View</label><br>
+                                    <select class="" ng-model="select.selectedGroups" material-select multiple watch data-ng-change="updateData()">
+                                        <option ng-repeat="value in select.groupChoices">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col s8 m6" style="max-height: 400px; overflow-y: auto">
             <table class="highlight centered">
                 <thead>
                 <tr>
@@ -25,7 +56,7 @@
             <div class="card-panel grey lighten-5 z-depth-1" style="width: 100%;">
                 <div class="row" data-ng-show="accounts.selected['Username']">
                     <div class="col s2">
-                        <img ng-src="https://twitter.com/{{accounts.selected['Username']}}/profile_image?size=bigger" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                        <img ng-src="https://twitter.com/{{accounts.selected['Username']}}/profile_image?size=bigger" alt="" class="circle responsive-img">
                     </div>
                     <div class="col s10">
                         <h5>{{accounts.selected['Name']}} &nbsp;  <label style="font-size: 1.2rem;">{{accounts.selected['Category']}}</label></h5>
@@ -36,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <div>
         <svg width="1000" height="1000"><g transform="translate(1,1)"></g></svg>    </div>
