@@ -1026,6 +1026,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
     var accounts = $scope.accounts = {
         data: [],
+        loaded: false,
         selected: null,
         formattedData: {
             Name: "Influencer Report",
@@ -1108,8 +1109,8 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             'Arts & Culture': '#F44336',
             'Business/Science/Education': '#9C27B0',
             'Consumer Goods': '#2196F3',
-            'Music': '#00796B',
-            'Entertainment': '#4CAF50',
+            'Music': '#00838F',
+            'Entertainment': '#FF9800',
             'Health/Beauty/Fashion/Fitness': '#FFEB3B',
             'Home/Family/Lifestyle': '#F4511E',
             'Political/Social': '#6D4C41',
@@ -1135,18 +1136,18 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             'Consumer Electronics': {group: 2, color:"#2196F3"},
             'Shopping': {group: 2, color:"#1976D2"},
             'Toys And Games': {group: 2, color:"#0D47A1"},
-            'Music': {group: 3, color:"#00796B"},
-            'Actors': {group: 4, color:"#66BB6A"},
-            'Gaming': {group: 4, color:"#C8E6C9"},
-            'Humor': {group: 4, color:"#A5D6A7"},
-            'Movies': {group: 4, color:"#81C784"},
-            'Multimedia': {group: 4, color:"#E8F5E9"},
-            'Podcasts': {group: 4, color:"#4CAF50"},
-            'Pop Culture': {group: 4, color:"#43A047"},
-            'Smalltalk': {group: 4, color:"#388E3C"},
-            'TV': {group: 4, color:"#2E7D32"},
-            'XXX': {group: 4, color:"#1B5E20"},
-            'Beauty': {group: 5, color: "#FFFF00"},
+            'Music': {group: 3, color:"#00838F"},
+            'Actors': {group: 4, color:"#FFE0B2"},
+            'Gaming': {group: 4, color:"#FFCC80"},
+            'Humor': {group: 4, color:"#FFB74D"},
+            'Movies': {group: 4, color:"#FFA726"},
+            'Multimedia': {group: 4, color:"#FB8C00"},
+            'Podcasts': {group: 4, color:"#F57C00"},
+            'Pop Culture': {group: 4, color:"#EF6C00"},
+            'Smalltalk': {group: 4, color:"#E65100"},
+            'TV': {group: 4, color:"#FF9800"},
+            'XXX': {group: 4, color:"#FFF3E0"},
+            'Beauty': {group: 5, color: "#FFD600"},
             'Fashion': {group: 5, color: "#FFF176"},
             'Fitness': {group: 5, color: "#FFEE58"},
             'Health Care': {group: 5, color: "#FFEB3B"},
@@ -1233,6 +1234,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
     $(document).ready(function(){
         $('.collapsible').collapsible();
+        d3.select("body").style('background-color', 'white');
     });
 
 
@@ -1266,7 +1268,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             }
         }
 
-        LoadReportService.fetch().then(function(data) {
+        /*LoadReportService.fetch().then(function(data) {
             accounts.data = data.data;
             accounts.data.forEach(function(account){
                 var groupInfo = categories.dict[account.Category];
@@ -1284,7 +1286,24 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             });
 
             buildChart();
-        })
+        })*/
+    };
+
+    var formatData = function(){
+        accounts.data.forEach(function(account){
+            var groupInfo = categories.dict[account.Category];
+            if (!groupInfo){
+                groupInfo = {group: 9, color: 'black'};
+            }
+            account.color = groupInfo.color;
+            account.group = groupInfo.group;
+
+            var index = categori.indexOf(account.Category);
+            if (index != -1){
+                accounts.formattedData.children[index].children.push(account);
+                accounts.count++;
+            }
+        });
     };
 
     var buildChart = function(){
@@ -1324,7 +1343,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         .duration(200)
                         .style("opacity", .9);
                     div.html("<img src='https://twitter.com/"+ d.data.Username+"/profile_image?size=bigger' alt='' " +
-                        "class='circle responsive-img'><h6><b>" + d.data.Name + "</b></h6><h6>"+d.data.Category+"</h6>" +
+                        "class='circle responsive-img'><h6 class='orange-text text-darken-2'><b>" + d.data.Name + "</b></h6><h6>"+d.data.Category+"</h6>" +
                         "<i class=\"fab fa-twitter cyan-text\"></i>" + "@"+d.data.Username +
                         "<br/><i class=\"fas fa-users\"></i> " + format(d.data.Followers))
                         .style("left", (d3.event.pageX) + "px")
@@ -1390,7 +1409,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             .text(function(d) { var max = (d.r / 2.5) - Math.sqrt(d.r); if (max > 15) max = max / 1.23; return d.data.Name.substring(0, max); })
             .style('fill', function(d) {
                 var hsl = d3.hsl(d.data.color);
-                return hsl.l > 0.37 ? 'black' : 'white';
+                return hsl.l > 0.5 ? 'black' : 'white';
             })
             .style('font-size', function(d){
                 var fs = (Math.sqrt(d.r) + 8);
@@ -1545,6 +1564,29 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
         }
 
         buildChart();
+    };
+
+    $scope.loadData = function(){
+        var files = document.getElementById('selectFiles').files;
+        console.log(files);
+        if (files.length <= 0) {
+            return false;
+        }
+
+        var fr = new FileReader();
+
+        fr.onload = function(e) {
+            var result = JSON.parse(e.target.result);
+            var formatted = JSON.stringify(result, null, 2);
+            accounts.data = result;
+            console.log(accounts.data);
+            formatData();
+            $scope.accounts.loaded = true;
+            $scope.$apply();
+            buildChart();
+        };
+
+        fr.readAsText(files.item(0));
     };
 
     $scope.selectAccount = function(account){
