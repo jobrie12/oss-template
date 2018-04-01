@@ -1,9 +1,9 @@
-<div class="container" id="" style="margin: 2.5%; max-width: none; min-width: 95%;">
-    <div class="row" data-ng-show="!accounts.loaded">
+<div class="container bg" id="" style="margin: 2.5%; max-width: none; min-width: 95%;">
+    <div class="row" data-ng-show="false" data-ng-show="!accounts.loaded" >
         <div class="col s12">
-            <div class="card blue-grey lighten-2">
+            <div class="card white-text lighten-2" style="background-color: #ff8700;">
                 <div class="card-content">
-                    <h4 style="margin-top: 0;" class="cyan-text text-accent-3">Import JSON File</h4>
+                    <h4 style="margin-top: 0;" class="text-accent-3">Import JSON File</h4>
                     <div class="center-align">
                         <input type="file" id="selectFiles" value="Import" /><br /><br>
                         <a class="waves-effect waves-light btn" style="min-width:50%;" id="import" data-ng-click="loadData()">Import JSON File</a>
@@ -12,33 +12,39 @@
             </div>
         </div>
     </div>
-    <div class="row" data-ng-show="accounts.loaded">
+    <div class="row" data-ng-show="true" data-ng-show="accounts.loaded" >
         <div class="col s12">
-            <div class="card lighten-2 white-text" style="background-color: #ff8700">
+            <div class="card lighten-2 white-text z-depth-4" style="background-color: #ff8700;">
                 <div class="card-content" style="padding-bottom: 0px;">
                     <h4 style="margin-top: 0;" class="">Control Panel</h4>
                     <div class="row" style="margin-bottom: 0;">
                         <div class="col s9">
                             <div class="row">
-                                <div input-field class="col s4">
+                                <div input-field class="col s12 m4">
+                                    <label class="white-text" style="margin-top: -30px;">Choose Audience Interest Report</label><br>
+                                    <select id="aiReport" class="" ng-model="select.report"
+                                            ng-options="file.display for file in select.fileList" material-select watch data-ng-change="loadNewSet()">
+                                    </select>
+                                </div>
+                                <div input-field class="col s12 m4">
                                     <label class="white-text" style="margin-top: -30px;">Choose Filter Method</label><br>
                                     <select id="filterBy" class="" ng-model="select.filterBy" material-select watch>
                                         <option ng-repeat="value in select.filterChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Categories'">
+                                <div input-field class="col s12 m4" data-ng-show="select.filterBy === 'Categories'">
                                     <label class="white-text" style="margin-top: -30px;">Select Categories to View</label><br>
                                     <select class="" ng-model="select.selectedCategories" material-select multiple watch data-ng-change="updateData()">
                                         <option ng-repeat="value in select.categoryChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Groups'">
+                                <div input-field class="col s12 m4" data-ng-show="select.filterBy === 'Groups'">
                                     <label class="white-text" style="margin-top: -30px;">Select Groups to View</label><br>
                                     <select class="" ng-model="select.selectedGroups" material-select multiple watch data-ng-change="updateData()">
                                         <option ng-repeat="value in select.groupChoices">{{value}}</option>
                                     </select>
                                 </div>
-                                <div input-field class="col s8" data-ng-show="select.filterBy === 'Threshold'">
+                                <div input-field class="col s12 m4" data-ng-show="select.filterBy === 'Threshold'">
                                     <label class="white-text" style="font-size: 1rem;">Input Minimum Threshold to Pass</label><br>
                                     <input type="number" ng-model="select.threshold" data-ng-change="updateData()"
                                            min="0.01" max="0.99" step="0.01">
@@ -60,6 +66,52 @@
                         <div class="col s12">
                             <div class="row">
                                 <div class="col s12 center-align">
+                                    <a class="waves-effect waves-light btn" data-ng-click="select.showList = !select.showList">{{select.showList?"Hide":"Show"}} List</a>
+                                    <br><br>
+                                </div>
+                                <div class="col s8 m6" data-ng-show="select.showList">
+                                    <div class="card-panel z-depth-3 orange-text text-darken-4" style=" border-radius: 10px;">
+                                        <div  style="max-height: 400px; overflow-y: auto;">
+                                            <table class="highlight centered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Username</th>
+                                                    <th>Category</th>
+                                                    <th>Blended Score</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                <tr data-ng-repeat="account in accounts.listData" class="clickable listrow" data-ng-click="selectAccount(account)" style="{{account == accounts.selected ? 'background-color: #34e8d8;':''}}">
+                                                    <td>{{account['Name']}}</td>
+                                                    <td>{{account['Username']}}</td>
+                                                    <td>{{account['Category']}}</td>
+                                                    <td>{{account['Blended Score'] * 100 | number: 2}}%</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s4 m6" data-ng-show="select.showList">
+                                    <h5 data-ng-hide="accounts.selected['Username']">Select an Account from the List to View More Info</h5>
+                                    <div class="card-panel z-depth-3" style="width: 100%; border-radius: 10px; background-color: #26a69a;" data-ng-show="accounts.selected['Username']">
+                                        <div class="row">
+                                            <div class="col s2">
+                                                <img ng-src="https://twitter.com/{{accounts.selected['Username']}}/profile_image?size=bigger" alt="" class="circle responsive-img">
+                                            </div>
+                                            <div class="col s10">
+                                                <h5>{{accounts.selected['Name']}} &nbsp;  <label style="font-size: 1.2rem; color: lightgrey;">{{accounts.selected['Category']}}</label></h5>
+                                                <h6><a href="https://twitter.com/{{accounts.selected['Username']}}" style="color: #acece6">
+                                                    @{{accounts.selected['Username']}}</a> &nbsp; | &nbsp;
+                                                    {{accounts.selected['Followers'] | number}} Followers
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12 center-align">
                                     <a class="waves-effect waves-light btn" data-ng-click="resetData()">Reset Chart</a>
                                     <h5 data-ng-show="accounts.count" class="white-text">{{accounts.count}} accounts included in this chart.</h5>
                                     <h5 data-ng-hide="accounts.count" class="red-text">There are no accounts with this configuration. Change your filter or <a class="clickable" data-ng-click="resetData()">click to reset</a>.</h5>
@@ -70,43 +122,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="col s8 m6" style="max-height: 400px; overflow-y: auto">
-            <table class="highlight centered">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Category</th>
-                    <th>Blended Score</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr data-ng-repeat="account in accounts.data" class="clickable" data-ng-click="selectAccount(account)" style="{{account == accounts.selected?'background-color: cyan;':''}}">
-                    <td>{{account['Name']}}</td>
-                    <td>{{account['Username']}}</td>
-                    <td>{{account['Category']}}</td>
-                    <td>{{account['Blended Score'] * 100 | number: 2}}%</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col s4 m6">
-            <div class="card-panel grey lighten-5 z-depth-1" style="width: 100%;">
-                <div class="row" data-ng-show="accounts.selected['Username']">
-                    <div class="col s2">
-                        <img ng-src="https://twitter.com/{{accounts.selected['Username']}}/profile_image?size=bigger" alt="" class="circle responsive-img">
-                    </div>
-                    <div class="col s10">
-                        <h5>{{accounts.selected['Name']}} &nbsp;  <label style="font-size: 1.2rem;">{{accounts.selected['Category']}}</label></h5>
-                        <h6><i class="fab fa-twitter cyan-text"></i><a href="https://twitter.com/{{accounts.selected['Username']}}">
-                            @{{accounts.selected['Username']}}</a> &nbsp; | &nbsp;
-                            <i class="fas fa-users"></i> {{accounts.selected['Followers'] | number}} Followers
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </div>
     <div class="row" data-ng-show="accounts.loaded">
         <div class="col s2">

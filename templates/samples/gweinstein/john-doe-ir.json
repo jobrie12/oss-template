@@ -65,19 +65,6 @@
   "Category": "Music"
  },
  {
-  "Rank": 1,
-  "Name": "Fifth Harmony",
-  "Username": "FifthHarmony",
-  "Followers": 5228023,
-  "Audience follower percentage": 0.383,
-  "Benchmark follower percentage": 0.094,
-  "Score": 0.28900000000000003,
-  "ALT Benchmark follower percentage": 0.01584249393939394,
-  "Blended Follower %": 0.05492124696969697,
-  "Blended Score": 0.32807875303030304,
-  "Category": "TV"
- },
- {
   "Rank": 33,
   "Name": "Zayn Malik",
   "Username": "zaynmalik",
@@ -141,19 +128,6 @@
   "Blended Follower %": 0.027925781818181818,
   "Blended Score": 0.3010742181818182,
   "Category": "Music"
- },
- {
-  "Rank": 2,
-  "Name": "Meghan Trainor",
-  "Username": "Meghan_Trainor",
-  "Followers": 2261016,
-  "Audience follower percentage": 0.329,
-  "Benchmark follower percentage": 0.049,
-  "Score": 0.2800000000000001,
-  "ALT Benchmark follower percentage": 0.006851563636363636,
-  "Blended Follower %": 0.027925781818181818,
-  "Blended Score": 0.3010742181818182,
-  "Category": "TV"
  },
  {
   "Rank": 21,
@@ -3796,19 +3770,6 @@
   "Category": "TV"
  },
  {
-  "Rank": 14,
-  "Name": "Access Hollywood",
-  "Username": "accessonline",
-  "Followers": 991002,
-  "Audience follower percentage": 0.039,
-  "Benchmark follower percentage": 0.016,
-  "Score": 0.023,
-  "ALT Benchmark follower percentage": 0.003003036363636364,
-  "Blended Follower %": 0.009501518181818183,
-  "Blended Score": 0.029498481818181817,
-  "Category": "Pop Culture"
- },
- {
   "Rank": 13,
   "Name": "Julianne Hough",
   "Username": "juliannehough",
@@ -4108,19 +4069,6 @@
   "Category": "TV"
  },
  {
-  "Rank": 1,
-  "Name": "Twitter Data",
-  "Username": "TwitterData",
-  "Followers": 758873,
-  "Audience follower percentage": 0.027999999999999997,
-  "Benchmark follower percentage": 0.0,
-  "Score": 0.027999999999999997,
-  "ALT Benchmark follower percentage": 0.0022996151515151516,
-  "Blended Follower %": 0.0011498075757575758,
-  "Blended Score": 0.02685019242424242,
-  "Category": "Computers"
- },
- {
   "Rank": 63,
   "Name": "Empire",
   "Username": "EmpireFOX",
@@ -4405,19 +4353,6 @@
   "Blended Follower %": 0.010105754545454546,
   "Blended Score": 0.02489424545454546,
   "Category": "TV"
- },
- {
-  "Rank": 8,
-  "Name": "Dancing with the Stars",
-  "Username": "DancingABC",
-  "Followers": 1059798,
-  "Audience follower percentage": 0.035,
-  "Benchmark follower percentage": 0.017,
-  "Score": 0.018,
-  "ALT Benchmark follower percentage": 0.003211509090909091,
-  "Blended Follower %": 0.010105754545454546,
-  "Blended Score": 0.02489424545454546,
-  "Category": "Dance"
  },
  {
   "Rank": 28,
@@ -4836,19 +4771,6 @@
   "Category": "TV"
  },
  {
-  "Rank": 8,
-  "Name": "Daredevil",
-  "Username": "Daredevil",
-  "Followers": 903174,
-  "Audience follower percentage": 0.024,
-  "Benchmark follower percentage": 0.0,
-  "Score": 0.024,
-  "ALT Benchmark follower percentage": 0.002736890909090909,
-  "Blended Follower %": 0.0013684454545454545,
-  "Blended Score": 0.022631554545454548,
-  "Category": "Podcasts"
- },
- {
   "Rank": 9,
   "Name": "VISITFLANDERS",
   "Username": "visitflanders",
@@ -5185,19 +5107,6 @@
   "Blended Follower %": 0.0009498863636363637,
   "Blended Score": 0.021050113636363634,
   "Category": "Podcasts"
- },
- {
-  "Rank": 12,
-  "Name": "Meghan Rienks",
-  "Username": "MeghanRienks",
-  "Followers": 626925,
-  "Audience follower percentage": 0.022,
-  "Benchmark follower percentage": 0.0,
-  "Score": 0.022,
-  "ALT Benchmark follower percentage": 0.0018997727272727274,
-  "Blended Follower %": 0.0009498863636363637,
-  "Blended Score": 0.021050113636363634,
-  "Category": "Beauty"
  },
  {
   "Rank": 64,
@@ -5926,19 +5835,6 @@
   "Blended Follower %": 0.0012700742424242425,
   "Blended Score": 0.017729925757575756,
   "Category": "Food"
- },
- {
-  "Rank": 3,
-  "Name": "Twitter Food",
-  "Username": "TwitterFood",
-  "Followers": 838249,
-  "Audience follower percentage": 0.019,
-  "Benchmark follower percentage": 0.0,
-  "Score": 0.019,
-  "ALT Benchmark follower percentage": 0.002540148484848485,
-  "Blended Follower %": 0.0012700742424242425,
-  "Blended Score": 0.017729925757575756,
-  "Category": "Cooking"
  },
  {
   "Rank": 19,
@@ -8825,19 +8721,6 @@
   "Blended Follower %": 0.010022978787878787,
   "Blended Score": 0.010977021212121215,
   "Category": "Humor"
- },
- {
-  "Rank": 22,
-  "Name": "Jay Leno",
-  "Username": "jayleno",
-  "Followers": 675166,
-  "Audience follower percentage": 0.021,
-  "Benchmark follower percentage": 0.018,
-  "Score": 0.003,
-  "ALT Benchmark follower percentage": 0.002045957575757576,
-  "Blended Follower %": 0.010022978787878787,
-  "Blended Score": 0.010977021212121215,
-  "Category": "Automotive"
  },
  {
   "Rank": 14,

@@ -12,8 +12,16 @@ circle {
   stroke-width: 2px;
 }
 
+.listrow:hover>td {
+    color: #196f67;
+}
+
 .leaf circle {
   fill-opacity: 1 !important;
+}
+
+.bg {
+    min-height: calc(100% - 279px);
 }
 
 text {
@@ -22,7 +30,7 @@ text {
 }
 
 .select-wrapper>input.select-dropdown{
-    border-bottom: 1px solid #000000 !important;
+    border-bottom: 1px solid #FFFFFF !important;
 }
 
 input[type=number]{

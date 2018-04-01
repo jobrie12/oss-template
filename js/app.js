@@ -1033,6 +1033,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             children: [],
             color: "white"
         },
+        listData: [],
         count: 0
     };
 
@@ -1097,6 +1098,8 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             "Other Sports"
         ],
         loose: false,
+        fileList: [{display: "James Doe", name: "James Doe.json"},{display: "John Doe", name: "john-doe-ir.json"}],
+        showList: false,
         threshold: 0.01
     };
 
@@ -1267,6 +1270,10 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 })
             }
         }
+
+        select.report = select.fileList[0];
+
+        $scope.loadNewSet(true);
 
         /*LoadReportService.fetch().then(function(data) {
             accounts.data = data.data;
@@ -1473,6 +1480,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
             children: [],
             color: "white"
         };
+        accounts.listData = [];
         accounts.count = 0;
         if (clean){
             select.loose = false;
@@ -1500,6 +1508,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                 var index = categori.indexOf(account.Category);
                 if (index != -1){
                     accounts.formattedData.children[index].children.push(account);
+                    accounts.listData.push(account);
                     accounts.count++;
                 }
             });
@@ -1531,6 +1540,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                     } else {
                         accounts.formattedData.children[index].children.push(account);
                     }
+                    accounts.listData.push(account);
                     accounts.count += 1;
                 } else if (select.filterBy == 'Categories' && index != -1){
                     if (select.selectedCategories.indexOf(account.Category) !== -1){
@@ -1539,6 +1549,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.listData.push(account);
                         accounts.count += 1;
                     }
                 } else if (select.filterBy == 'Groups' && index != -1){
@@ -1548,6 +1559,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.listData.push(account);
                         accounts.count += 1;
                     }
                 } else if (select.filterBy == 'Threshold' && index != -1){
@@ -1557,6 +1569,7 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
                         } else {
                             accounts.formattedData.children[index].children.push(account);
                         }
+                        accounts.listData.push(account);
                         accounts.count += 1;
                     }
                 }
@@ -1589,6 +1602,24 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
         fr.readAsText(files.item(0));
     };
 
+    $scope.loadNewSet = function(first){
+        if (first){
+            LoadReportService.fetch(select.report.name).then(function(data) {
+                accounts.data = data.data;
+                accounts.listData = data.data;
+                formatData();
+                $scope.accounts.loaded = true;
+                buildChart();
+            });
+        } else {
+            LoadReportService.fetch(select.report.name).then(function(data) {
+                accounts.data = data.data;
+                $scope.accounts.loaded = true;
+                $scope.updateData();
+            });
+        }
+    };
+
     $scope.selectAccount = function(account){
         accounts.selected = account;
     };
@@ -1602,10 +1633,10 @@ app.controller('gweinsteinCtrl', ['$scope', '$state', '$location', '$window', 'L
 
 app.factory('LoadReportService', function($q,$timeout,$http) {
     var players = {
-        fetch: function(callback) {
+        fetch: function(file, callback) {
             var deferred = $q.defer();
             $timeout(function() {
-                $http.get("/oss-template/data/john-doe-ir.json").then(function(data) {
+                $http.get("./templates/samples/gweinstein/"+file).then(function(data) {
                     deferred.resolve(data);
                 });
             }, 30);
